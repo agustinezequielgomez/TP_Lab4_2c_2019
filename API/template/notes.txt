@@ -1,0 +1,4 @@
+->create dir for images
+->watermark replaces tmp file
+->couldn't get put with getParsedBody() to work, use post for edit
+->for updating image and data together, /update/{id}, no usar raw json
