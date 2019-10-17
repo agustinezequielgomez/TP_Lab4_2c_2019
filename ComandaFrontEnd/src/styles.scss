@@ -1,1 +1,96 @@
+@import '~@angular/material/theming';
+@include mat-core();
+$md-primary: (
+    50 : #e7f3fd,
+    100 : #c3e2fa,
+    200 : #9bcff7,
+    300 : #73bcf3,
+    400 : #55adf1,
+    500 : #379fee,
+    600 : #3197ec,
+    700 : #2a8de9,
+    800 : #2383e7,
+    900 : #1672e2,
+    A100 : #ffffff,
+    A200 : #e0edff,
+    A400 : #adcfff,
+    A700 : #93c0ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$md-secondary: (
+    50 : #fdf0e7,
+    100 : #fadbc3,
+    200 : #f7c39b,
+    300 : #f3aa73,
+    400 : #f19855,
+    500 : #ee8637,
+    600 : #ec7e31,
+    700 : #e9732a,
+    800 : #e76923,
+    900 : #e25616,
+    A100 : #ffffff,
+    A200 : #ffe8e0,
+    A400 : #ffc4ad,
+    A700 : #ffb193,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+$ComandaFrontEnd-primary: mat-palette($md-primary);
+$ComandaFrontEnd-accent: mat-palette($md-secondary);
+$ComandaFrontEnd-warn: mat-palette($mat-red);
+$ComandaFrontEnd-theme: mat-light-theme($ComandaFrontEnd-primary, $ComandaFrontEnd-accent, $ComandaFrontEnd-warn);
+@include angular-material-theme($ComandaFrontEnd-theme);
+
 /* You can add global styles to this file, and also import other style files */
+@import './vivify.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
+.warning {
+    background-color: #ee8637;
+    color: white;
+}
+
+.success {
+    background-color: #0ec704;
+    color: white;
+}

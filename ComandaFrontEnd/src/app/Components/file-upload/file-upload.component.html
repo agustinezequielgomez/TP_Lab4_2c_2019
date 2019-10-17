@@ -1,0 +1,7 @@
+<img [src]="this.url" class="rounded-circle" alt="">
+<br>
+<p class="vivify fadeIn" *ngIf="this.url !== '../../assets/blankPick.png'">¡Te ves genial!</p>
+<div class="upload-btn-wrapper">
+    <button mat-raised-button color="accent">Subir foto de perfil</button>
+    <input type="file" ng2FileSelect (change)="this.getRendererImage($event)" [uploader]="this.uploader"/>
+</div>
