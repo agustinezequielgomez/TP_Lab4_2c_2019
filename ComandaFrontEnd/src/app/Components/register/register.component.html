@@ -1,27 +1,30 @@
 <app-file-upload (fileSelected)="this.getProfilePic($event)"></app-file-upload>
 <form [formGroup]="this.form">
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input type="text" matInput placeholder="Nombre" formControlName="nombre">
-        <mat-hint *ngIf="this.form.controls['nombre'].invalid" class="text-danger">El nombre de usuario es un campo requerido</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Contraseña</mat-label>
-        <input type="password" matInput placeholder="Contraseña" formControlName="password">
-        <mat-hint *ngIf="this.form.controls['password'].invalid" class="text-danger">La contraseña es un campo requerido</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-select formControlName="role" placeholder="Rol del empleado">
-            <mat-option *ngFor="let rol of this.roles" value="{{rol}}">{{rol | titlecase}}</mat-option>
-        </mat-select>
-        <mat-hint *ngIf="this.form.controls['role'].invalid" class="text-danger">El rol es un campo requerido</mat-hint>
-    </mat-form-field>
-</p>
-<button mat-raised-button color="accent" [disabled]="this.form.invalid || this.profilePic === null" class="w-100" id="registerButton" (click)="this.register()">Registrarse</button>
-<mat-progress-bar *ngIf="this.registering == true" color="primary" mode="query"></mat-progress-bar>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput placeholder="Nombre" formControlName="nombre">
+            <mat-hint *ngIf="this.form.controls['nombre'].invalid" class="text-danger">El nombre de usuario es un campo requerido</mat-hint>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput placeholder="Contraseña" formControlName="password">
+            <mat-hint *ngIf="this.form.controls['password'].invalid" class="text-danger">La contraseña es un campo requerido</mat-hint>
+        </mat-form-field>
+    </p>
+    <!-- <p>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="role" placeholder="Rol del empleado">
+                <mat-option *ngFor="let rol of this.roles" value="{{rol}}">{{rol | titlecase}}</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="this.form.controls['role'].invalid" class="text-danger">El rol es un campo requerido</mat-hint>
+        </mat-form-field>
+    </p> -->
+    <p>
+        <re-captcha (resolved)="resolvedCaptcha($event)"></re-captcha>
+    </p>
+    <button mat-raised-button color="accent" [disabled]="this.form.invalid || this.profilePic === null || this.recaptcha === false" class="w-100" id="registerButton" (click)="this.register()">Registrarse</button>
+    <mat-progress-bar *ngIf="this.registering == true" color="primary" mode="query"></mat-progress-bar>
 </form>

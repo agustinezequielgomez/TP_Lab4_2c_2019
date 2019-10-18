@@ -44,10 +44,10 @@ export class LoginComponent implements OnInit {
       timer(1000).subscribe(() => {
         this.registering = false;
         this.processToken(token);
+        sessionStorage.setItem('token', token);
         if (this.saveUser) {
           localStorage.setItem('token', token);
         }
-        console.log(token);
         this.redirection.redirectionService();
       });
     },
@@ -72,5 +72,6 @@ export class LoginComponent implements OnInit {
     const DATA = this.jwt.decodeToken(token).data;
     this.share.setUserName(DATA.nombre);
     this.share.setRole(DATA.tipo);
+    sessionStorage.setItem('role', DATA.tipo);
   }
 }

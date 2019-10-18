@@ -3,24 +3,24 @@
         <div simple-snack-bar class="mat-simple-snackbar">
             <span>
                 <button class="button" mat-button (click)="this.snackBarRef.dismiss()">Cerrar</button>
-                {{this.data.snackMessage}}
+                ❌{{this.data.snackMessage}}
             </span>
-        </div>
+</div>
+</div>
+<div *ngSwitchCase="2">
+    <div simple-snack-bar class="mat-simple-snackbar">
+        <span>
+                <mat-spinner class="spinner" [color]="'primary'" [diameter]="30"></mat-spinner>
+                ⚠️ Credenciales expiradas. Redirigiendo al login
+            </span>
     </div>
-    <div *ngSwitchCase="2">
-            <div simple-snack-bar class="mat-simple-snackbar">
-                <span>
-                    <mat-spinner class="spinner" [color]="'primary'" [diameter]="30"></mat-spinner>
-                    ⚠️ Credenciales expiradas. Redirigiendo al login
-                </span>
-            </div>
+</div>
+<div *ngSwitchCase="3">
+    <div simple-snack-bar class="mat-simple-snackbar">
+        <span>
+                <button class="button" mat-button (click)="this.snackBarRef.dismiss()">Cerrar</button>
+                ✔️ {{this.data.snackMessage}}
+            </span>
     </div>
-    <div *ngSwitchCase="3">
-            <div simple-snack-bar class="mat-simple-snackbar">
-                    <span>
-                        <button class="button" mat-button (click)="this.snackBarRef.dismiss()">Cerrar</button>
-                        ✔️ {{this.data.snackMessage}}
-                    </span>
-                </div>
-    </div>
+</div>
 </span>

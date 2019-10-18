@@ -159,7 +159,7 @@ class MWComanda
         $empleado->nombre = $atributos["nombre"];
         $empleado->pass = $atributos["pass"];
         $empleado->tipo = $atributos["tipo"];
-        if($empleado->tipo == "administrador"||$empleado->tipo == "bartender"||$empleado->tipo == "cervecero"||$empleado->tipo == "cocinero"||$empleado->tipo == "mozo"||$empleado->tipo == "socio")
+        if($empleado->tipo == "administrador"||$empleado->tipo == "bartender"||$empleado->tipo == "cervecero"||$empleado->tipo == "cocinero"||$empleado->tipo == "mozo"||$empleado->tipo == "socio"||$empleado->tipo == "cliente")
         {
             if($empleado->ValidarEmpleadoExistenteAlta()==false)
             {

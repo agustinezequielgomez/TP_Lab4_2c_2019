@@ -21,14 +21,15 @@ export class RegisterComponent implements OnInit {
   public profilePic: File = null;
   public roles = Object.keys(EmployeeRole);
   public registering = false;
+  public recaptcha = false;
   @Output() SuccessfulRegister = new EventEmitter();
   constructor(private access: AccessService, private snack: DisplaySnackBarService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
       nombre: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required)
+      password: new FormControl('', Validators.required)
+      // role: new FormControl('', Validators.required)
     });
   }
 
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
     const REQUEST = new FormData();
     REQUEST.append('nombre', this.form.controls['nombre'].value);
     REQUEST.append('pass', this.form.controls['password'].value);
-    REQUEST.append('tipo', this.form.controls['role'].value);
+    REQUEST.append('tipo', 'cliente');
     REQUEST.append('foto', this.profilePic);
     this.access.register(REQUEST).subscribe((response) => {
       timer(1000).subscribe(() => {
@@ -49,11 +50,15 @@ export class RegisterComponent implements OnInit {
         this.snack.openSnackBar('Usuario creado con exito.', 'success', 3);
         this.SuccessfulRegister.emit();
       })
-    }, (err) =>{
+    }, (err) => {
       timer(1000).subscribe(() => {
         this.registering = false;
         this.snack.openSnackBar(err.error, 'error', 1);
-      })
+      });
     });
+  }
+
+  resolvedCaptcha($event) {
+    this.recaptcha = true;
   }
 }

@@ -10,7 +10,7 @@ export class RedirectionServiceService {
   constructor(private share: DataShareService, private router: Router) { }
 
   redirectionService() {
-    const ROLE = this.share.getRole();
+    const ROLE = sessionStorage.getItem('role');
     console.log(ROLE);
     switch (ROLE) {
       case 'administrador':

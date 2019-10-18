@@ -1,8 +1,6 @@
 .container-fluid {
     background: linear-gradient(270deg, #0b8ef1, #ee8637 50%, #781dee, #3743ee);
-    background-size: 800% 800%;
-    width: inherit;
-    height: inherit;
+    background-size: 800%;
     height: 100%;
     width: 100%;
     padding-top: 1rem;
@@ -50,62 +48,72 @@
 #card {
     width: 30vw;
     text-align: center;
-    margin-left:auto;
-    margin-right:auto;  
+    margin-left: auto;
+    margin-right: auto;
     background-color: rgba(255, 255, 255, 0.733);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-#content
-{
+@media(max-width: 720px) {
+    #card {
+        width: 80vw;
+    }
+}
+
+.cardRegister {
+    height: 70vh;
+    max-height: 80vh;
+}
+
+#content {
     margin-top: 5%;
     width: 85%;
-    margin-left:auto;
-    margin-right:auto;  
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 5%;
 }
 
-#title 
-{
+#title {
     color: white;
     margin-top: 4%;
     font-size: 3vw;
 }
 
-.actionText
-{
+.actionText {
     cursor: pointer;
     color: #0000EE;
 }
 
 .focus-in-expand {
-	-webkit-animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    -webkit-animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
- @-webkit-keyframes focus-in-expand {
+@-webkit-keyframes focus-in-expand {
     0% {
-      letter-spacing: -0.5em;
-      -webkit-filter: blur(12px);
-              filter: blur(12px);
-      opacity: 0;
+        letter-spacing: -0.5em;
+        -webkit-filter: blur(12px);
+        filter: blur(12px);
+        opacity: 0;
     }
     100% {
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
-      opacity: 1;
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
     }
-  }
-  @keyframes focus-in-expand {
+}
+
+@keyframes focus-in-expand {
     0% {
-      letter-spacing: -0.5em;
-      -webkit-filter: blur(12px);
-              filter: blur(12px);
-      opacity: 0;
+        letter-spacing: -0.5em;
+        -webkit-filter: blur(12px);
+        filter: blur(12px);
+        opacity: 0;
     }
     100% {
-      -webkit-filter: blur(0px);
-              filter: blur(0px);
-      opacity: 1;
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+        opacity: 1;
     }
-  }
-  
+}

@@ -33,7 +33,7 @@ export class InterceptorService implements HttpInterceptor {
       );
     }
 
-    const TOKEN = this.share.getToken();
+    const TOKEN = sessionStorage.getItem('token'); //this.share.getToken();
     if (this.jwtHelper.isTokenExpired(TOKEN)) {
       this.router.navigate(['/Login']);
     } else {

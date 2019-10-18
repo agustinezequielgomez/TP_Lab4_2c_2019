@@ -1,19 +1,19 @@
 <div class="container-fluid">
     <h2 id="title" class="text-center focus-in-expand">Bienvenido a la comanda</h2>
-    <mat-card class="vivify fadeIn" id="card">
+    <mat-card class="vivify fadeIn" id="card" [class.cardLogin]="this.login == true" [class.cardRegister]="this.register == true">
         <mat-card-content *ngIf="this.login" class="vivify fadeInLeft" [class.fadeOutLeft]="this.toRegister == true" id="content">
             <app-login></app-login>
         </mat-card-content>
         <mat-card-actions *ngIf="this.login" class="vivify fadeInLeft" [class.fadeOutLeft]="this.toRegister == true">
-                <p class="actionText" (click)="this.displayRegister()" >¿No tenes usuario? ¡Registrate ahora!</p>
-            </mat-card-actions>
+            <p class="actionText" (click)="this.displayRegister()">¿No tenes usuario? ¡Registrate ahora!</p>
+        </mat-card-actions>
 
 
         <mat-card-content *ngIf="this.register" class="vivify fadeInRight" [class.fadeOutRight]="this.toLogin == true">
             <app-register (SuccessfulRegister)="this.displayLogin()"></app-register>
         </mat-card-content>
         <mat-card-actions *ngIf="this.register" class="vivify fadeInRight" [class.fadeOutRight]="this.toLogin == true">
-                <p class="actionText vivify" (click)="this.displayLogin()">¿Ya tenes usuario? ¡Logueate ahora!</p>
-        </mat-card-actions>    
+            <p class="actionText vivify" (click)="this.displayLogin()">¿Ya tenes usuario? ¡Logueate ahora!</p>
+        </mat-card-actions>
     </mat-card>
 </div>

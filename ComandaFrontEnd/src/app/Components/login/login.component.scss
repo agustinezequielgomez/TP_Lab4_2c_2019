@@ -1,5 +1,4 @@
-mat-form-field 
-{
+mat-form-field {
     width: 100%;
 }
 
@@ -14,4 +13,8 @@ mat-form-field
 #checkbox {
     display: flex;
     margin-top: 7%;
+}
+
+#loginHint {
+    margin-bottom: 3%;
 }

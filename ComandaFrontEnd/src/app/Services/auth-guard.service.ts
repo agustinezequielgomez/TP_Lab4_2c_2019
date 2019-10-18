@@ -19,14 +19,14 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
   boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.share.setLastUrl(state.url);
-    if (state.url !== '/Access' && this.jwt.isTokenExpired(this.share.getToken())) {
+    if (state.url !== '/Access' && this.jwt.isTokenExpired(sessionStorage.getItem('token'))) {
       this.snack.openSnackBar('', 'warning', 2);
-      timer(5000).subscribe(() => {
+      timer(3000).subscribe(() => {
         this.router.navigate(['/Access']);
       });
     }
 
-    const ROLE = this.share.getRole();
+    const ROLE = sessionStorage.getItem('role');
     switch (state.url) {
       case '/Access':
         return true;

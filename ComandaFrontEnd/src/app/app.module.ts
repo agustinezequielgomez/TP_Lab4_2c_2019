@@ -26,6 +26,8 @@ import { MozoScreenComponent } from './Components/mozo-screen/mozo-screen.compon
 import { CocineroScreenComponent } from './Components/cocinero-screen/cocinero-screen.component';
 import { CervezeroScreenComponent } from './Components/cervezero-screen/cervezero-screen.component';
 import { HeaderComponent } from './Components/header/header.component';
+import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
+import { ClientScreenComponent } from './Components/client-screen/client-screen.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { HeaderComponent } from './Components/header/header.component';
     MozoScreenComponent,
     CocineroScreenComponent,
     CervezeroScreenComponent,
-    HeaderComponent
+    HeaderComponent,
+    ClientScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { HeaderComponent } from './Components/header/header.component';
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
+    RecaptchaModule,
     MatSelectModule,
     MatCardModule,
     MatFormFieldModule,
@@ -63,7 +67,10 @@ import { HeaderComponent } from './Components/header/header.component';
     MatDividerModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
-              {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}],
+              {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+              {provide: RECAPTCHA_SETTINGS, useValue: {siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+              theme: 'light', size: 'normal', type: 'image', badge: 'inline'} as RecaptchaSettings},
+              {provide: RECAPTCHA_LANGUAGE, useValue: 'es'}],
   bootstrap: [AppComponent],
   entryComponents: [SnackBarTemplateComponent]
 })
