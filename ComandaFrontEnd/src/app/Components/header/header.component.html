@@ -1,6 +1,5 @@
-<div class="card vivify fadeInTop duration-1000">
-        <div class="card-body">
-            Bienvenido, {{this.share.getUserName()}}
-        </div>
-</div>
-<mat-divider class="card vivify fadeInTop duration-1000"></mat-divider>
+<mat-toolbar [color]="'primary'">
+<mat-toolbar-row>
+    <app-menu [template]="'admin'"></app-menu>
+</mat-toolbar-row>
+</mat-toolbar>

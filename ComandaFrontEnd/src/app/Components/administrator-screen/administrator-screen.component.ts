@@ -12,4 +12,7 @@ export class AdministratorScreenComponent implements OnInit {
   ngOnInit() {
   }
 
+  hello() {
+    console.log('hi');
+  }
 }

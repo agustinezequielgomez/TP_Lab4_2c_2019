@@ -14,8 +14,7 @@ import { AccessScreenComponent } from './Components/access-screen/access-screen.
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSlideToggleModule,
   MatCheckboxModule, MatSelectModule, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatProgressSpinnerModule,
-  MatProgressBarModule,
-  MatDividerModule} from '@angular/material';
+  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -28,6 +27,8 @@ import { CervezeroScreenComponent } from './Components/cervezero-screen/cervezer
 import { HeaderComponent } from './Components/header/header.component';
 import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { ClientScreenComponent } from './Components/client-screen/client-screen.component';
+import { CardComponent } from './Components/card/card.component';
+import { MenuComponent } from './Components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { ClientScreenComponent } from './Components/client-screen/client-screen.
     CocineroScreenComponent,
     CervezeroScreenComponent,
     HeaderComponent,
-    ClientScreenComponent
+    ClientScreenComponent,
+    CardComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,9 @@ import { ClientScreenComponent } from './Components/client-screen/client-screen.
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatToolbarModule,
+    MatMenuModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},

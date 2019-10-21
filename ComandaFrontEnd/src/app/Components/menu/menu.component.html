@@ -1,0 +1,9 @@
+<span [ngSwitch]="this.template">
+<p *ngSwitchCase="'admin'">
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>Item1</button>
+        <button mat-menu-item>Item2</button>
+    </mat-menu>
+</p>
+</span>
