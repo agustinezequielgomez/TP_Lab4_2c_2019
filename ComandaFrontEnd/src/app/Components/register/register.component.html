@@ -14,14 +14,6 @@
             <mat-hint *ngIf="this.form.controls['password'].invalid" class="text-danger">La contraseña es un campo requerido</mat-hint>
         </mat-form-field>
     </p>
-    <!-- <p>
-        <mat-form-field appearance="outline">
-            <mat-select formControlName="role" placeholder="Rol del empleado">
-                <mat-option *ngFor="let rol of this.roles" value="{{rol}}">{{rol | titlecase}}</mat-option>
-            </mat-select>
-            <mat-hint *ngIf="this.form.controls['role'].invalid" class="text-danger">El rol es un campo requerido</mat-hint>
-        </mat-form-field>
-    </p> -->
     <p>
         <re-captcha (resolved)="resolvedCaptcha($event)"></re-captcha>
     </p>

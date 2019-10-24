@@ -9,6 +9,7 @@ import { timer } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { RedirectionServiceService } from '../../Services/redirection-service.service';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { StorageService } from '../../Services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   public registering = false;
   private jwt: JwtHelperService = new JwtHelperService();
   constructor(private access: AccessService, public share: DataShareService,
-              private redirection: RedirectionServiceService, private snack: DisplaySnackBarService) { }
+              private redirection: RedirectionServiceService, private snack: DisplaySnackBarService, private storage: StorageService) { }
 
   ngOnInit() {
     if (!this.jwt.isTokenExpired(localStorage.getItem('token'))) {
@@ -44,10 +45,6 @@ export class LoginComponent implements OnInit {
       timer(1000).subscribe(() => {
         this.registering = false;
         this.processToken(token);
-        sessionStorage.setItem('token', token);
-        if (this.saveUser) {
-          localStorage.setItem('token', token);
-        }
         this.redirection.redirectionService();
       });
     },
@@ -68,10 +65,21 @@ export class LoginComponent implements OnInit {
   }
 
   processToken(token: string) {
-    this.share.setToken(token);
-    const DATA = this.jwt.decodeToken(token).data;
-    this.share.setUserName(DATA.nombre);
-    this.share.setRole(DATA.tipo);
-    sessionStorage.setItem('role', DATA.tipo);
+    const DECODED_TOKEN = this.jwt.decodeToken(token).data;
+    const STORAGE_DATA = {
+      id: DECODED_TOKEN.id,
+      nombre: DECODED_TOKEN.nombre,
+      role: DECODED_TOKEN.tipo,
+      token: token
+    };
+    this.storage.setSessionStorage('data', STORAGE_DATA);
+    if (this.saveUser) {
+      this.storage.setLocalStorage('data', STORAGE_DATA);
+    }
+    console.log('DECODE:', this.storage.getSessionStorage('data'));
+    // this.share.setToken(token);
+    // this.share.setUserName(DATA.nombre);
+    // this.share.setRole(DATA.tipo);
+    // sessionStorage.setItem('role', DATA.tipo);
   }
 }

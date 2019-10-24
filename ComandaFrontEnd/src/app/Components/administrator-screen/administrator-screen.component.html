@@ -1,2 +1,19 @@
 <app-header></app-header>
-<app-card [title]="'Usuarios'" [subtitle]="'Administracion de usuarios'" [imgPath]="'../../../assets/123.jpg'" [buttonText]="'Salute >>'" [buttonCallback]="this.hello"></app-card>
+<div class="container-fluid">
+    <div id="cardContainer" class="card-deck">
+        <mat-card class="fade-in-fwd" *ngFor="let card of this.cards">
+            <mat-card-header>
+                <mat-card-title>{{card.title}}</mat-card-title>
+                <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <img mat-card-image class="cardImg" src="{{card.imgPath}}" alt="">
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button color="accent" (click)="card.callback()">{{card.buttonText}}</button>
+            </mat-card-actions>
+        </mat-card>
+        <!-- <app-card *ngFor="let card of this.cards" [title]="card.title" [subtitle]="card.subtitle" [imgPath]="'../../../assets/123.jpg'"
+                [buttonText]="card.buttonText" [buttonCallback]="card.callback"></app-card> -->
+    </div>
+</div>

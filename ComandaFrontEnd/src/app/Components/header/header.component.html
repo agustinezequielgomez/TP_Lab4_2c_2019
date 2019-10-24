@@ -1,5 +1,8 @@
 <mat-toolbar [color]="'primary'">
 <mat-toolbar-row>
     <app-menu [template]="'admin'"></app-menu>
+    <span class="blankSpace"></span>
+    <p id="userName">{{this.userName}} | </p>
+    <mat-icon (click)="this.logOut()" id="icon">exit_to_app</mat-icon>
 </mat-toolbar-row>
 </mat-toolbar>

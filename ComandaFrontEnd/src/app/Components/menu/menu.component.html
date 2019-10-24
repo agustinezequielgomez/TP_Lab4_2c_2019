@@ -1,9 +1,9 @@
 <span [ngSwitch]="this.template">
-<p *ngSwitchCase="'admin'">
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item>Item1</button>
-        <button mat-menu-item>Item2</button>
-    </mat-menu>
-</p>
+<div *ngSwitchCase="'admin'">
+    <button mat-button>Usuarios</button>
+    <button mat-button>Registros</button>
+    <button mat-button>Menu</button>
+    <button mat-button>Mesas</button>
+    <button mat-button>Estadisticas</button>
+</div>
 </span>

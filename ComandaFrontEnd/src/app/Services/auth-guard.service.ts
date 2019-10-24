@@ -5,6 +5,7 @@ import { DataShareService } from './data-share.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DisplaySnackBarService } from './display-snack-bar.service';
 import { RedirectionServiceService } from './redirection-service.service';
+import { StorageService } from './storage.service';
 
 
 @Injectable({
@@ -14,19 +15,19 @@ export class AuthGuardService implements CanActivate {
 
   private jwt: JwtHelperService = new JwtHelperService();
   constructor(private router: Router, public share: DataShareService, private snack: DisplaySnackBarService,
-              private redirect: RedirectionServiceService) { }
+              private redirect: RedirectionServiceService, private storage: StorageService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
   boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.share.setLastUrl(state.url);
-    if (state.url !== '/Access' && this.jwt.isTokenExpired(sessionStorage.getItem('token'))) {
+    if (state.url !== '/Access' && this.jwt.isTokenExpired(this.storage.getSessionStorage('data').token)) {
       this.snack.openSnackBar('', 'warning', 2);
       timer(3000).subscribe(() => {
         this.router.navigate(['/Access']);
       });
     }
 
-    const ROLE = sessionStorage.getItem('role');
+    const ROLE = this.storage.getSessionStorage('data').role;
     switch (state.url) {
       case '/Access':
         return true;

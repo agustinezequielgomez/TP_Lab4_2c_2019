@@ -1,0 +1,4 @@
+@import '../../../cards.scss';
+* {
+    @include cards();
+}

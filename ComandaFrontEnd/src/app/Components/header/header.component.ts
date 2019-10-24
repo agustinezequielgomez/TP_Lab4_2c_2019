@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataShareService } from '../../Services/data-share.service';
+import { StorageService } from '../../Services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,15 @@ import { DataShareService } from '../../Services/data-share.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public share: DataShareService) { }
+  public userName = this.storage.getSessionStorage('data').nombre;
+  constructor(public storage: StorageService, private router: Router) { }
 
   ngOnInit() {
   }
 
+  logOut() {
+    this.storage.deleteLocalStorage('data');
+    this.storage.deleteSessionStorage('data');
+    this.router.navigate(['Access']);
+  }
 }

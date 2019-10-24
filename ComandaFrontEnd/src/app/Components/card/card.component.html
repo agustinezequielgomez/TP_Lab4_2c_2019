@@ -3,7 +3,9 @@
         <mat-card-title>{{this.title}}</mat-card-title>
         <mat-card-subtitle>{{this.subtitle}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{this.imgPath}}" alt="">
+    <mat-card-content>
+        <img mat-card-image class="img-fluid" src="{{this.imgPath}}" alt="">
+    </mat-card-content>
     <mat-card-actions>
         <button mat-button color="accent" (click)="this.buttonCallback()">{{this.buttonText}}</button>
     </mat-card-actions>

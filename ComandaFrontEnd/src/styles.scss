@@ -94,3 +94,71 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #0ec704;
     color: white;
 }
+
+@mixin cards {
+    mat-card {
+        width: 25vw;
+        margin-right: 3%;
+        margin-top: 2%;
+    }
+    
+    img {
+        object-fit: none;
+        width: 100%;
+        margin: auto;
+        margin-right: 0;
+    }
+    
+    #cardContainer {
+        margin: auto;
+        padding-left: 6.5%;
+    }
+    
+    @media(max-width: 720px) {
+        #cardContainer {
+            margin: 1% 0;
+            padding-left: 0;  
+        }
+    
+        mat-card {
+            width: 45vw;
+            margin-right: 1%;
+        }
+    
+        .container-fluid {
+            padding: 0 5px;
+        }
+    }    
+}
+
+.fade-in-fwd {
+	-webkit-animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+ @-webkit-keyframes fade-in-fwd {
+    0% {
+      -webkit-transform: translateZ(-80px);
+              transform: translateZ(-80px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes fade-in-fwd {
+    0% {
+      -webkit-transform: translateZ(-80px);
+              transform: translateZ(-80px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  
+  

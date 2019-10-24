@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { DataShareService } from './data-share.service';
 import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RedirectionServiceService {
 
-  constructor(private share: DataShareService, private router: Router) { }
+  constructor(private storage: StorageService, private router: Router) { }
 
   redirectionService() {
-    const ROLE = sessionStorage.getItem('role');
-    console.log(ROLE);
-    switch (ROLE) {
+    const DATA = this.storage.getSessionStorage('data');
+    console.log(DATA.role);
+    switch (DATA.role) {
       case 'administrador':
         this.router.navigate(['AdministratorScreen']);
         break;
