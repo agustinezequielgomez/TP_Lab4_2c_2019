@@ -1,36 +1,25 @@
 @mixin cards {
-    mat-card {
-        max-width: 25vw;
+    app-card {
         margin-right: 3%;
-        margin-top: 2%;
+        margin-bottom: 2%;
+        padding-bottom: 0.5%;
     }
-    
-    img {
-        object-fit: none;
-        width: 90%;
-        // height: 50%;
-        margin: auto;
-        // margin-right: 0;
-    }
-    
     #cardContainer {
         margin: auto;
         padding-left: 6.5%;
+        display: flex;
     }
-    
     @media(max-width: 720px) {
         #cardContainer {
             margin: 1% 0;
-            padding-left: 0;  
+            padding-left: 0;
         }
-    
-        mat-card {
+        app-card {
             width: 45vw;
-            margin-right: 1%;
+            margin-right: -15%;
         }
-    
         .container-fluid {
             padding: 0 5px;
         }
-    }    
+    }
 }

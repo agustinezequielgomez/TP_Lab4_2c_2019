@@ -1,10 +1,14 @@
 mat-card {
-    width: 40%;
+    width: 25vw;
+    max-width: 30vw;
+    cursor: pointer;
 }
 
-img {
-    object-fit: none;
-    width: 100%;
-    margin: auto;
-    margin-right: 0;
+.last-child {
+    margin-bottom: 0;
+}
+
+.cardImg {
+    margin-top: .5%;
+    margin-bottom: 0;
 }

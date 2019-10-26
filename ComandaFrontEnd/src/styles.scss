@@ -1,70 +1,7 @@
 @import '~@angular/material/theming';
 @include mat-core();
-$md-primary: (
-    50 : #e7f3fd,
-    100 : #c3e2fa,
-    200 : #9bcff7,
-    300 : #73bcf3,
-    400 : #55adf1,
-    500 : #379fee,
-    600 : #3197ec,
-    700 : #2a8de9,
-    800 : #2383e7,
-    900 : #1672e2,
-    A100 : #ffffff,
-    A200 : #e0edff,
-    A400 : #adcfff,
-    A700 : #93c0ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$md-secondary: (
-    50 : #fdf0e7,
-    100 : #fadbc3,
-    200 : #f7c39b,
-    300 : #f3aa73,
-    400 : #f19855,
-    500 : #ee8637,
-    600 : #ec7e31,
-    700 : #e9732a,
-    800 : #e76923,
-    900 : #e25616,
-    A100 : #ffffff,
-    A200 : #ffe8e0,
-    A400 : #ffc4ad,
-    A700 : #ffb193,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
+$md-primary: ( 50: #e7f3fd, 100: #c3e2fa, 200: #9bcff7, 300: #73bcf3, 400: #55adf1, 500: #379fee, 600: #3197ec, 700: #2a8de9, 800: #2383e7, 900: #1672e2, A100: #ffffff, A200: #e0edff, A400: #adcfff, A700: #93c0ff, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #ffffff, 800: #ffffff, 900: #ffffff, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
+$md-secondary: ( 50: #fdf0e7, 100: #fadbc3, 200: #f7c39b, 300: #f3aa73, 400: #f19855, 500: #ee8637, 600: #ec7e31, 700: #e9732a, 800: #e76923, 900: #e25616, A100: #ffffff, A200: #ffe8e0, A400: #ffc4ad, A700: #ffb193, contrast: ( 50: #000000, 100: #000000, 200: #000000, 300: #000000, 400: #000000, 500: #000000, 600: #000000, 700: #000000, 800: #000000, 900: #ffffff, A100: #000000, A200: #000000, A400: #000000, A700: #000000, ));
 $ComandaFrontEnd-primary: mat-palette($md-primary);
 $ComandaFrontEnd-accent: mat-palette($md-secondary);
 $ComandaFrontEnd-warn: mat-palette($mat-red);
@@ -72,11 +9,19 @@ $ComandaFrontEnd-theme: mat-light-theme($ComandaFrontEnd-primary, $ComandaFrontE
 @include angular-material-theme($ComandaFrontEnd-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@import './vivify.min.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-*{
+// @import './vivify.min.css';
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -101,64 +46,58 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         margin-right: 3%;
         margin-top: 2%;
     }
-    
     img {
         object-fit: none;
         width: 100%;
         margin: auto;
         margin-right: 0;
     }
-    
     #cardContainer {
         margin: auto;
         padding-left: 6.5%;
     }
-    
     @media(max-width: 720px) {
         #cardContainer {
             margin: 1% 0;
-            padding-left: 0;  
+            padding-left: 0;
         }
-    
         mat-card {
             width: 45vw;
             margin-right: 1%;
         }
-    
         .container-fluid {
             padding: 0 5px;
         }
-    }    
+    }
 }
 
 .fade-in-fwd {
-	-webkit-animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
- @-webkit-keyframes fade-in-fwd {
+@-webkit-keyframes fade-in-fwd {
     0% {
-      -webkit-transform: translateZ(-80px);
-              transform: translateZ(-80px);
-      opacity: 0;
+        -webkit-transform: translateZ(-80px);
+        transform: translateZ(-80px);
+        opacity: 0;
     }
     100% {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
-      opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1;
     }
-  }
-  @keyframes fade-in-fwd {
+}
+
+@keyframes fade-in-fwd {
     0% {
-      -webkit-transform: translateZ(-80px);
-              transform: translateZ(-80px);
-      opacity: 0;
+        -webkit-transform: translateZ(-80px);
+        transform: translateZ(-80px);
+        opacity: 0;
     }
     100% {
-      -webkit-transform: translateZ(0);
-              transform: translateZ(0);
-      opacity: 1;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        opacity: 1;
     }
-  }
-  
-  
+}

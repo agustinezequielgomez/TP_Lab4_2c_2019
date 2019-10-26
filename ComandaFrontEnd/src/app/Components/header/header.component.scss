@@ -7,11 +7,15 @@
     margin: auto;
 }
 
-#userName, #icon {
+#userName,
+#icon {
     @include nameLogOut();
 }
 
 #icon {
     margin: 0 2% 0 .5%;
-    cursor: pointer;
+}
+
+mat-toolbar {
+    margin-bottom: 2%;
 }

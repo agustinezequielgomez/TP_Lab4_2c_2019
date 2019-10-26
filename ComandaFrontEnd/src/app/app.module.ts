@@ -14,7 +14,7 @@ import { AccessScreenComponent } from './Components/access-screen/access-screen.
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSlideToggleModule,
   MatCheckboxModule, MatSelectModule, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatProgressSpinnerModule,
-  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule} from '@angular/material';
+  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule, MatRippleModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -70,7 +70,8 @@ import { MenuComponent } from './Components/menu/menu.component';
     MatDividerModule,
     MatToolbarModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatRippleModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
