@@ -14,7 +14,7 @@ class JWTAuth
   {
     $payload = array(
       'iat' => time(),
-      'exp' => time() + (.5),
+      'exp' => time() + (6000),
       'aud' => self::Aud(),
       'data' => $datos,
       'app' => "Api Rest Haedo Jonathan"

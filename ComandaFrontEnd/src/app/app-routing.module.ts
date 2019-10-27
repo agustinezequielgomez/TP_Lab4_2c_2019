@@ -9,6 +9,7 @@ import { CervezeroScreenComponent } from './Components/cervezero-screen/cervezer
 import { CocineroScreenComponent } from './Components/cocinero-screen/cocinero-screen.component';
 import { MozoScreenComponent } from './Components/mozo-screen/mozo-screen.component';
 import { SocioScreenComponent } from './Components/socio-screen/socio-screen.component';
+import { ClientScreenComponent } from './Components/client-screen/client-screen.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'CerveceroScreen', component: CervezeroScreenComponent, canActivate: [AuthGuardService]},
   {path: 'CocineroScreen', component: CocineroScreenComponent, canActivate: [AuthGuardService]},
   {path: 'MozoScreen', component: MozoScreenComponent, canActivate: [AuthGuardService]},
-  {path: 'SocioScreen', component: SocioScreenComponent, canActivate: [AuthGuardService]}
+  {path: 'SocioScreen', component: SocioScreenComponent, canActivate: [AuthGuardService]},
+  {path: 'ClienteScreen', component: ClientScreenComponent, canActivate: [AuthGuardService]}
 ];
 
 @NgModule({

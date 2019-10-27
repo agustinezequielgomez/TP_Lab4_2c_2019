@@ -1,10 +1,6 @@
-<mat-toolbar [color]="'primary'">
+<mat-toolbar class="toolbar" [color]="'primary'">
     <mat-toolbar-row>
-        <app-menu [template]="this.menuTemplate"></app-menu>
-        <span class="blankSpace"></span>
-        <p id="userName">{{this.userName}} | </p>
-        <button mat-icon-button>
-            <mat-icon (click)="this.logOut()" id="icon">exit_to_app</mat-icon>
-        </button>
+        <button mat-icon-button color="accent" (click)="toggleMenu()"><mat-icon>menu</mat-icon></button>
+        <app-menu #menu [template]="this.menuTemplate" [importes]="this.importes"></app-menu>
     </mat-toolbar-row>
 </mat-toolbar>

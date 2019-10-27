@@ -163,5 +163,10 @@ class ConsultasController
 
         }
     }
+
+    function ImportesTotales(Request $request, Response $response, array $args)
+    {
+        return $response->withJson(consultas::ImportesTotales(), 200);
+    }
 }
 ?>

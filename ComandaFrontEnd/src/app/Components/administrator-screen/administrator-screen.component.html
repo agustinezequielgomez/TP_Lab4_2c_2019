@@ -1,15 +1,6 @@
 <app-header [menuTemplate]="'admin'"></app-header>
 <div class="container-fluid">
     <div id="cardContainer" class="card-deck">
-        <!-- <mat-card matRipple [matRippleColor]="'#f1995596'" (click)="card.callback()" class="fade-in-fwd" *ngFor="let card of this.cards">
-            <mat-card-header>
-                <mat-card-title>{{card.title}}</mat-card-title>
-                <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="last-child">
-                <img mat-card-image class="cardImg" src="{{card.imgPath}}" alt="">
-            </mat-card-content>
-        </mat-card> -->
-        <app-card *ngFor="let card of this.cards" [title]="card.title" [subtitle]="card.subtitle" [imgPath]="card.imgPath" [buttonCallback]="card.callback"></app-card>
+        <app-card *ngFor="let card of this.cards" [title]="card.title" [subtitle]="card.subtitle" [imgPath]="card.imgPath" [callback]="card.callback"></app-card>
     </div>
 </div>

@@ -8,7 +8,7 @@ import { DataProviderService } from '../../Services/data-provider.service';
 })
 export class AdministratorScreenComponent implements OnInit {
 
-  public cards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction, buttonText: string}[];
+  public cards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[];
   constructor(private provider: DataProviderService) { }
 
   ngOnInit() {

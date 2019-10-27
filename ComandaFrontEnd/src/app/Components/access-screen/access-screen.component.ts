@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataShareService } from '../../Services/data-share.service';
 import { timer } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Employee } from '../../Classes/employee';
+import { AccessService } from '../../Services/access.service';
 
 @Component({
   selector: 'app-access-screen',
@@ -14,9 +16,11 @@ export class AccessScreenComponent implements OnInit {
   public register = false;
   public toLogin = false;
   public login = true;
-  constructor(public share: DataShareService) { }
+  public employees: Employee[];
+  constructor(public share: DataShareService, private access: AccessService) { }
 
   ngOnInit() {
+
   }
 
   displayRegister() {

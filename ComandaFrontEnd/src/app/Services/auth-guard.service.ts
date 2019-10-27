@@ -21,7 +21,7 @@ export class AuthGuardService implements CanActivate {
   boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.share.setLastUrl(state.url);
     if (state.url !== '/Access' && this.jwt.isTokenExpired(this.storage.getSessionStorage('data').token)) {
-      this.snack.openSnackBar('', 'warning', 2);
+      this.snack.openSnackBar('Autenticacion expirada. Volviendo al login.', 'warning', 2);
       timer(3000).subscribe(() => {
         this.router.navigate(['/Access']);
       });
@@ -71,6 +71,14 @@ export class AuthGuardService implements CanActivate {
             this.redirect.redirectionService();
           }
           break;
+
+      case '/ClienteScreen':
+        if (ROLE === 'cliente') {
+          return true;
+        } else {
+          this.redirect.redirectionService();
+        }
+        break;
     }
   }
 

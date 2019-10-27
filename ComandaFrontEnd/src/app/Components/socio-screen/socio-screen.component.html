@@ -1,1 +1,6 @@
-<app-header></app-header>
+<app-header [menuTemplate]="'socio'" [importes]="this.importes"></app-header>
+<div class="container-fluid">
+    <div class="card-deck">
+        <app-card *ngFor="let card of this.cards" [callback]="card.callback" [imgPath]="card.imgPath" [subtitle]="card.subtitle" [title]="card.title"></app-card>
+    </div>
+</div>

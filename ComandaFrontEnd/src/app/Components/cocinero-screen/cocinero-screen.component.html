@@ -1,1 +1,6 @@
-<app-header></app-header>
+<app-header [menuTemplate]="'cocinero'"></app-header>
+<div class="container-fluid">
+    <div class="card-deck">
+        <app-card *ngFor="let card of this.cards" [callback]="card.callback" [imgPath]="card.imgPath" [title]="card.title" [subtitle]="card.subtitle"></app-card>
+    </div>
+</div>

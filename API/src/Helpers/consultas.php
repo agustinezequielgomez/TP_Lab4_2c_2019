@@ -142,5 +142,16 @@ class consultas
         }
         return $facturacionPorMesa;
     }
+
+    static function ImportesTotales()
+    {
+        $importes = importe::all();
+        $importesTotales = 0;
+        foreach($importes as $importe)
+        {
+            $importesTotales += $importe->importe;
+        }
+        return $importesTotales;
+    }
 }
 ?>

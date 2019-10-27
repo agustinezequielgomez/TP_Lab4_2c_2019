@@ -40,7 +40,7 @@ class MWComanda
     
     function MWVerificarToken(Request $request,Response $response,$next)
     {
-        if($request->getUri()->getPath()=='/Pedidos/TiempoEstimado')
+        if($request->getUri()->getPath()=='/Pedidos/TiempoEstimado' || $request->getUri()->getPath()=='Empleados/' && $request->getMethod()=='GET'&&$request->getQueryParam('login')=='true')
         {
             $response = $next($request,$response);
             return $response;
@@ -60,9 +60,15 @@ class MWComanda
 
     function MWVerificarCredenciales(Request $request,Response $response,$next)
     {
-        if($request->getUri()->getPath()=='/Pedidos/TiempoEstimado')
+        if($request->getUri()->getPath()=='/Pedidos/TiempoEstimado' || $request->getUri()->getPath()=='/Empleados' && $request->getMethod()=='GET'&&$request->getQueryParam('login')=='true')
         {
             $response = $next($request,$response);
+            return $response;
+        }
+
+        if ($request->getUri()->getPath()=='Empleados/' && $request->getMethod()=='GET'&&$request->getQueryParam('login')=='true')
+        {
+            $response = $next($request, $response);
             return $response;
         }
         $token = $request->getHeader('token')[0];
@@ -105,7 +111,8 @@ class MWComanda
             break;
 
             case "socio":
-            if($request->getUri()->getPath()=='Alimentos/'||$request->getUri()->getPath()=='/Menu/'|| $request->getUri()->getPath()=='/Pedidos/' && $request->getMethod()=="GET" || $request->getUri()->getPath()=='/Mesa/' || $request->getUri()->getPath()=='/Mesa/Cierre' || $request->getUri()->getPath()=='/Mesa/Cobro')
+            if($request->getUri()->getPath()=='Alimentos/'||$request->getUri()->getPath()=='/Menu/'|| $request->getUri()->getPath()=='/Pedidos/' && $request->getMethod()=="GET" || $request->getUri()->getPath()=='/Mesa/' || $request->getUri()->getPath()=='/Mesa/Cierre' || $request->getUri()->getPath()=='/Mesa/Cobro'
+            || $request->getUri()->getPath() == 'Consultas/ImportesTotales' )
             {
                 
                 $response = $next($request,$response);

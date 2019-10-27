@@ -1,11 +1,6 @@
-<span [ngSwitch]="">
-<p *ngSwitchCase="true">
-
-</p>
-<p *ngSwitchCase="false">
-
-</p>
-<p *ngSwitchDefault>
-
-</p>
-</span>
+<app-header [menuTemplate]="'client'"></app-header>
+<div class="container-fluid">
+    <div class="card-deck">
+    <app-card *ngFor="let card of this.cards" [callback]="card.callback" [imgPath]="card.imgPath" [title]="card.title" [subtitle]="card.subtitle"></app-card>
+</div>
+</div>

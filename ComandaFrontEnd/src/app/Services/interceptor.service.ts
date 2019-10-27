@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, timer, EMPTY } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { DataShareService } from './data-share.service';
 import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
+import { DisplaySnackBarService } from './display-snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,18 @@ import { Router } from '@angular/router';
 export class InterceptorService implements HttpInterceptor {
 
   private jwtHelper = new JwtHelperService();
-  constructor(private share: DataShareService, private router: Router) { }
+  constructor(private storage: StorageService, private router: Router, private snack: DisplaySnackBarService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const REQUEST = req.clone();
-    REQUEST.headers.set('Access-Control-Allow-Origin', '*');
-    REQUEST.headers.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
-    REQUEST.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    if (REQUEST.url.includes('/Login') || REQUEST.url.includes('/Register')) {
+    let HEADERS = new HttpHeaders();
+    HEADERS = HEADERS.set('Access-Control-Allow-Origin', '*');
+    HEADERS = HEADERS.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+    HEADERS = HEADERS.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    let REQUEST = req.clone({
+      headers: HEADERS
+    });
+    console.log(req.headers);
+    if (req.url.includes('/Login') || req.url.includes('/Register')  || req.urlWithParams.includes('/Empleados/?login=true')) {
       return next.handle(REQUEST).pipe(
         retry(1),
         catchError((err) => {
@@ -33,12 +39,18 @@ export class InterceptorService implements HttpInterceptor {
       );
     }
 
-    const TOKEN = sessionStorage.getItem('token'); //this.share.getToken();
+    const TOKEN = this.storage.getSessionStorage('data').token;
+    console.log(this.authAPIAccess(REQUEST), REQUEST.url);
     if (this.jwtHelper.isTokenExpired(TOKEN)) {
-      this.router.navigate(['/Login']);
-    } else {
-      REQUEST.headers.set('token', TOKEN);
-      next.handle(REQUEST).pipe(
+      this.snack.openSnackBar('Autenticacion expirada. Volviendo al login', 'warning', 2);
+      timer(3000).subscribe(() => this.router.navigate(['Access']));
+      return EMPTY;
+    } else if (this.authAPIAccess(REQUEST)) {
+      HEADERS = HEADERS.append('token', `${this.storage.getSessionStorage('data').token}`);
+      REQUEST = req.clone({
+        headers: HEADERS
+      });
+      return next.handle(REQUEST).pipe(
         retry(1),
         catchError((err) => {
           const ERROR_RESPONSE = new HttpErrorResponse({
@@ -48,6 +60,60 @@ export class InterceptorService implements HttpInterceptor {
           return throwError(ERROR_RESPONSE);
         })
       );
+    } else {
+      this.snack.openSnackBar('No posees los permisos para realizar esta accion. Volviendo al login', 'warning', 2);
+      timer(3000).subscribe(() => this.router.navigate(['Access']));
+      return EMPTY;
+    }
+  }
+
+  authAPIAccess(request: HttpRequest<any>): boolean {
+    const ROLE = this.storage.getSessionStorage('data').role;
+    switch (ROLE) {
+      case 'administrador':
+        if (request.url.includes('/Empleados') || request.url.includes('/Registros') ||
+        request.url.includes('/Menu') || request.url.includes('/Mesa') || request.url.includes('/Consultas')) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+
+      case 'cocinero':
+      case 'bartender':
+      case 'cervecero':
+        if (request.url.includes('/Alimentos')) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+
+      case 'mozo':
+        if (request.url.includes('/Pedidos') && !request.url.includes('/Pedidos/TiempoEstimado')) {
+          return true;
+        } else {
+          return false;
+        }
+        break;
+
+      case 'socio':
+          if (request.url.includes('/Alimentos') || request.url.includes('/Menu') ||
+          request.url.includes('/Pedidos') && request.method === 'GET' || request.url.includes('/Mesa') ||
+          request.url.includes('/Consultas/ImportesTotales')) {
+            return true;
+          } else {
+            return false;
+          }
+          break;
+
+      case 'cliente':
+        if (request.url.includes('/Pedidos/TiempoEstimado') || request.url.includes('/Menu') && request.method === 'GET') {
+          return true;
+        } else {
+          return false;
+        }
+        break;
     }
   }
 }

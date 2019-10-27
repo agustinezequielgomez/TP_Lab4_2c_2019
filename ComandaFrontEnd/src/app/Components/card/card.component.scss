@@ -1,14 +1,30 @@
-mat-card {
-    width: 25vw;
-    max-width: 30vw;
+#card {
+    width: 30vw;
     cursor: pointer;
+    margin-top: 3%;
+    flex: none;
+    margin-left: 2.5vw;
 }
 
 .last-child {
+    margin-top: .8%;
     margin-bottom: 0;
 }
 
 .cardImg {
-    margin-top: .5%;
+    margin-top: .9%;
     margin-bottom: 0;
+}
+
+@media(max-width: 900px) {
+    #card {
+        width: 43vw;
+    }
+}
+
+@media(max-width: 600px) {
+    #card {
+        width: auto;
+        margin-left: 0;
+    }
 }

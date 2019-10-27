@@ -1,9 +1,37 @@
-<span [ngSwitch]="this.template">
-<div *ngSwitchCase="'admin'">
-    <button mat-stroked-button class="menuButton" color="accent">Usuarios</button>
-    <button mat-stroked-button class="menuButton" color="accent">Registros</button>
-    <button mat-stroked-button class="menuButton" color="accent">Menu</button>
-    <button mat-stroked-button class="menuButton" color="accent">Mesas</button>
-    <button mat-stroked-button class="menuButton" color="accent">Estadisticas</button>
-</div>
-</span>
+<mat-sidenav-container [hasBackdrop]="true" (backdropClick)="this.sideNav.close()">
+    <mat-sidenav #sideNav [disableClose]="true" [mode]="'over'" [position]="'start'" [fixedInViewport]="true" fixedTopGap="64">
+        <mat-nav-list>
+            <span [ngSwitch]="this.template">
+                    <div *ngSwitchCase="'admin'">
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">person</mat-icon>&nbsp;Usuarios</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">list</mat-icon>&nbsp;Registros</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'" fontSet="material-icons-round">bar_chart_round</mat-icon>&nbsp;Estadisticas</mat-list-item>
+                    </div>
+                    <div *ngSwitchCase="'client'">
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                    </div>
+                    <div *ngSwitchCase="'beerMan'">
+                        <mat-list-item class="menuItem"><fa-icon [icon]="faBeer"></fa-icon>&nbsp;Cervezas</mat-list-item>
+                    </div>
+                    <div *ngSwitchCase="'cocinero'">
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">fastfood</mat-icon>&nbsp;Comidas</mat-list-item>
+                    </div>
+                    <div *ngSwitchCase="'mozo'">
+                        <mat-list-item class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
+                    </div>
+                    <div *ngSwitchCase="'socio'">
+                        <mat-list-item class="moneyMenuItem" [disableRipple]="true"><mat-icon [color]="'accent'">attach_money</mat-icon>&nbsp;Importes totales:&nbsp; <div class="money">${{this.importes}}</div></mat-list-item>
+                        <mat-divider class="menuItem"></mat-divider>                
+                        <mat-list-item class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
+                    </div>
+                </span>
+                <mat-divider class="menuItem"></mat-divider>
+                <mat-list-item class="menuItem" (click)="this.logOut()"><mat-icon [color]="'accent'">exit_to_app</mat-icon>&nbsp;Salir</mat-list-item>
+            </mat-nav-list>
+    </mat-sidenav>
+</mat-sidenav-container>

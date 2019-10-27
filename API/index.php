@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ServerreqInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Helpers\AppConfig;
 
@@ -11,6 +11,13 @@ $config = ['settings' => ['displayErrorDetails' => true]];
 
 $app = new \Slim\App($config);
 
+$app->add(function ($req, $res, $next) {
+    $res = $res->withHeader('Access-Control-Allow-Origin', '*');
+    $res = $res->withHeader('Access-Control-Allow-Methods', $req->getHeaderLine('Access-Control-Request-Method'));
+    $res = $res->withHeader('Access-Control-Allow-Headers', $req->getHeaderLine('Access-Control-Request-Headers'));
+
+    return $next($req, $res);
+});
 
 $capsule = new Capsule;
 $capsule->addConnection(AppConfig::$illuminateDb);
@@ -43,14 +50,5 @@ $pedidoRoutes($app);
 
 $rateRoutes = require __DIR__.'/src/Routes/RateRoutes.php';
 $rateRoutes($app);
-
-
-$app->add(function ($req, $res, $next) {
-    $response = $next($req, $res);
-    return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
-             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-});
 
 $app->run();

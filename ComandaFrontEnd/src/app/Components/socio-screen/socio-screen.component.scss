@@ -1,0 +1,5 @@
+@import '../../../card-layout.scss';
+
+* {
+    @include card-layout();
+}

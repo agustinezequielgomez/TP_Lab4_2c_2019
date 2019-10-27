@@ -15,6 +15,12 @@
         <mat-slide-toggle id="toggle" [color]="'accent'" (change)="this.showPassword()">Mostrar contraseña</mat-slide-toggle>
         <mat-checkbox id="checkbox" [color]="'accent'" [checked]="'false'" [ngModelOptions]="{standalone: true}" [(ngModel)]="this.saveUser">Recordar usuario</mat-checkbox>
     </p>
+    <mat-form-field appearance="legacy">
+        <mat-label>Quick Login!</mat-label>
+        <mat-select [disableOptionCentering]="true">
+                <mat-option (onSelectionChange)="this.quickLoginSelection(employee)" *ngFor="let employee of this.employees" [value]="employee">{{employee.nombre}} / {{employee.tipo}}</mat-option>
+        </mat-select>
+    </mat-form-field>
     <button mat-raised-button color="accent" [disabled]="this.form.invalid" class="w-100" id="loginButton" (click)="this.login()">Login</button>
     <mat-progress-bar *ngIf="this.registering == true" color="primary" mode="query"></mat-progress-bar>
 </form>

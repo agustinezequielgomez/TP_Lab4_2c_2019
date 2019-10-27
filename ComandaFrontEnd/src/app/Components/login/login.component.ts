@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { timer } from 'rxjs';
+import { Employee } from '../../Classes/employee';
 import { AccessService } from '../../Services/access.service';
 import { DataShareService } from '../../Services/data-share.service';
-import { Router } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { SnackBarTemplateComponent } from '../snack-bar-template/snack-bar-template.component';
-import { timer } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { RedirectionServiceService } from '../../Services/redirection-service.service';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { RedirectionServiceService } from '../../Services/redirection-service.service';
 import { StorageService } from '../../Services/storage.service';
 
 @Component({
@@ -18,8 +16,7 @@ import { StorageService } from '../../Services/storage.service';
 })
 export class LoginComponent implements OnInit {
 
-  public userName: string;
-  public password: string;
+  public employees: Employee[];
   public type = 'password';
   public saveUser = false;
   public form: FormGroup;
@@ -37,11 +34,14 @@ export class LoginComponent implements OnInit {
       nombre: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
+    this.access.getEmployees().subscribe((response) => {
+      this.employees = response;
+    });
   }
 
   login() {
     this.registering = true;
-    this.access.login(this.form.controls['nombre'].value, this.form.controls['password'].value).subscribe((token) => {
+    this.access.login(this.form.controls.nombre.value, this.form.controls.password.value).subscribe((token) => {
       timer(1000).subscribe(() => {
         this.registering = false;
         this.processToken(token);
@@ -64,22 +64,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  quickLoginSelection(employee: Employee) {
+    this.form.get('nombre').setValue(employee.nombre);
+    this.form.get('password').setValue(employee.pass);
+  }
+
   processToken(token: string) {
     const DECODED_TOKEN = this.jwt.decodeToken(token).data;
     const STORAGE_DATA = {
       id: DECODED_TOKEN.id,
       nombre: DECODED_TOKEN.nombre,
       role: DECODED_TOKEN.tipo,
-      token: token
+      token
     };
     this.storage.setSessionStorage('data', STORAGE_DATA);
     if (this.saveUser) {
       this.storage.setLocalStorage('data', STORAGE_DATA);
     }
-    console.log('DECODE:', this.storage.getSessionStorage('data'));
-    // this.share.setToken(token);
-    // this.share.setUserName(DATA.nombre);
-    // this.share.setRole(DATA.tipo);
-    // sessionStorage.setItem('role', DATA.tipo);
   }
 }

@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,7 @@ import { AccessScreenComponent } from './Components/access-screen/access-screen.
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSlideToggleModule,
   MatCheckboxModule, MatSelectModule, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatProgressSpinnerModule,
-  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule, MatRippleModule} from '@angular/material';
+  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule, MatRippleModule, MatSidenavModule, MatListModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -29,6 +29,8 @@ import { RecaptchaModule, RECAPTCHA_SETTINGS, RecaptchaSettings, RECAPTCHA_LANGU
 import { ClientScreenComponent } from './Components/client-screen/client-screen.component';
 import { CardComponent } from './Components/card/card.component';
 import { MenuComponent } from './Components/menu/menu.component';
+import { MatIconRegistry } from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { MenuComponent } from './Components/menu/menu.component';
     ReactiveFormsModule,
     FileUploadModule,
     RecaptchaModule,
+    FontAwesomeModule,
     MatSelectModule,
     MatCardModule,
     MatFormFieldModule,
@@ -71,7 +74,10 @@ import { MenuComponent } from './Components/menu/menu.component';
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatRippleModule
+    MatRippleModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
@@ -81,4 +87,5 @@ import { MenuComponent } from './Components/menu/menu.component';
   bootstrap: [AppComponent],
   entryComponents: [SnackBarTemplateComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

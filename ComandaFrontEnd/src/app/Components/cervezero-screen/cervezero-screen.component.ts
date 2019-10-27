@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataProviderService } from '../../Services/data-provider.service';
 
 @Component({
   selector: 'app-cervezero-screen',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CervezeroScreenComponent implements OnInit {
 
-  constructor() { }
+  public cards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[];
+  constructor(private provider: DataProviderService) { }
 
   ngOnInit() {
+    this.cards = this.provider.getBeerManCard;
   }
 
 }

@@ -34,6 +34,10 @@ export class RedirectionServiceService {
         this.router.navigate(['SocioScreen']);
         break;
 
+      case 'cliente':
+        this.router.navigate(['ClienteScreen']);
+        break;
+
       default:
         this.router.navigate(['Access']);
         break;

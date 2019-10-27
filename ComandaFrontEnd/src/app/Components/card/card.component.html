@@ -1,4 +1,4 @@
-<mat-card matRipple [matRippleColor]="'#f1995596'" (click)="this.callback()" class="fade-in-fwd">
+<mat-card id="card" matRipple [matRippleColor]="'#f1995596'" (click)="this.callback()" class="fade-in-fwd">
     <mat-card-header>
         <mat-card-title>{{this.title}}</mat-card-title>
         <mat-card-subtitle>{{this.subtitle}}</mat-card-subtitle>
@@ -7,11 +7,3 @@
         <img mat-card-image class="cardImg" src="{{this.imgPath}}" alt="">
     </mat-card-content>
 </mat-card>
-
-<div class="card">
-    <img class="card-img-top" src="holder.js/100x180/" alt="">
-    <div class="card-body">
-        <h4 class="card-title">Title</h4>
-        <p class="card-text">Text</p>
-    </div>
-</div>

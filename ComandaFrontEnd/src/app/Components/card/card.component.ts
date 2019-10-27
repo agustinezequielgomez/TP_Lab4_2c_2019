@@ -11,7 +11,7 @@ export class CardComponent implements OnInit {
   @Input() subtitle: string;
   @Input() imgPath: string;
   @Input() buttonText: string;
-  @Input() buttonCallback: CallableFunction;
+  @Input() callback: CallableFunction;
   constructor() { }
 
   ngOnInit() {
