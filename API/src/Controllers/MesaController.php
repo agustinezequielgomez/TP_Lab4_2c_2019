@@ -8,6 +8,11 @@ use Models\pedido;
 
 class MesaController
 {
+    function GetMesas(Request $request, Response $response, array $args)
+    {
+        return $response->withJson(mesa::all(), 200);
+    }
+
     function EnviarUno(Request $request, Response $response, array $args)
     {
         $mesa = new mesa();

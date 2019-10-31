@@ -16,6 +16,7 @@ class MenuController
         $menu->nombre = strtolower($request->getParsedBody()["nombre"]);
         $menu->tipo = strtolower($request->getParsedBody()["tipo"]);
         $menu->precio = $request->getParsedBody()["precio"];
+        $menu->path = $menu->subirFoto($request->getUploadedFiles(), "./public/img/Menu/");
         $menu->save();
         return $response->withJson("Alimento agregado al menu exitosamente", 200);
     }

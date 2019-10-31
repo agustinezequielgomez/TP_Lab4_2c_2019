@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 
 @Component({
@@ -11,6 +11,8 @@ export class FileUploadComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({});
   public file: File;
   public url = '../../assets/blankPick.png';
+  @Input() message: string;
+  @Input() displayUploadedFoto = true;
   @Output() fileSelected = new EventEmitter<File>();
   constructor() { }
 

@@ -76,7 +76,7 @@ class MWComanda
         switch($data->tipo)
         {
             case "administrador":
-            if($request->getUri()->getPath()=='/Empleados/'|| starts_with($request->getUri()->getPath(),'/Empleados/')|| $request->getUri()->getPath()=='Registros/'||$request->getUri()->getPath()=='/Menu/' || $request->getUri()->getPath()=='/Mesa/' || starts_with($request->getUri()->getPath(),'/Consultas/' ))
+            if($request->getUri()->getPath()=='/Empleados/'|| starts_with($request->getUri()->getPath(),'/Empleados/')|| $request->getUri()->getPath()=='Registros/'||$request->getUri()->getPath()=='Menu/' || $request->getUri()->getPath()=='/Mesa/' || starts_with($request->getUri()->getPath(),'/Consultas/' ))
             {
                 $response = $next($request,$response);
             }
@@ -100,7 +100,7 @@ class MWComanda
             break;
 
             case "mozo":
-            if(starts_with($request->getUri()->getPath(),'/Pedidos/') && $request->getUri()->getPath()!='/Pedidos/TiempoEstimado')
+            if(starts_with($request->getUri()->getPath(),'Pedidos/') && $request->getUri()->getPath()!='/Pedidos/TiempoEstimado' || $request->getUri()->getPath() === 'Menu/' && $request->getMethod() == "GET" || $request->getUri()->getPath() === 'Mesa/' && $request->getMethod() == "GET")
             {
                 $response = $next($request,$response);
             }
@@ -323,7 +323,7 @@ class MWComanda
         $id_mesa = $request->getParsedBody()["n_mesa"];
         if(mesa::find($id_mesa)!=NULL)
         {
-            if((mesa::find($id_mesa))->estado=="cerrada" && $request->getUri()->getPath()=='/Pedidos/')
+            if((mesa::find($id_mesa))->estado=="cerrada" && $request->getUri()->getPath()=='Pedidos/')
             {
                 $response = $next($request,$response);
             }

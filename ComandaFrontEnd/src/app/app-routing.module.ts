@@ -10,6 +10,8 @@ import { CocineroScreenComponent } from './Components/cocinero-screen/cocinero-s
 import { MozoScreenComponent } from './Components/mozo-screen/mozo-screen.component';
 import { SocioScreenComponent } from './Components/socio-screen/socio-screen.component';
 import { ClientScreenComponent } from './Components/client-screen/client-screen.component';
+import { ProductsMenuComponent } from './Components/products-menu/products-menu.component';
+import { GenerateOrderComponent } from './Components/generate-order/generate-order.component';
 
 
 const routes: Routes = [
@@ -19,8 +21,10 @@ const routes: Routes = [
   {path: 'CerveceroScreen', component: CervezeroScreenComponent, canActivate: [AuthGuardService]},
   {path: 'CocineroScreen', component: CocineroScreenComponent, canActivate: [AuthGuardService]},
   {path: 'MozoScreen', component: MozoScreenComponent, canActivate: [AuthGuardService]},
+  {path: 'generateOrder', component: GenerateOrderComponent},
   {path: 'SocioScreen', component: SocioScreenComponent, canActivate: [AuthGuardService]},
-  {path: 'ClienteScreen', component: ClientScreenComponent, canActivate: [AuthGuardService]}
+  {path: 'ClienteScreen', component: ClientScreenComponent, canActivate: [AuthGuardService]},
+  {path: 'Menu', component: ProductsMenuComponent}
 ];
 
 @NgModule({

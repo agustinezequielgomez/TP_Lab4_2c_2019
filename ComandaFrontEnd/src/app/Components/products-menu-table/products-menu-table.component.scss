@@ -1,0 +1,44 @@
+table {
+    width: 100%;
+}
+
+#container {
+    padding: 1% 2%;
+}
+
+.mat-table__wrapper .mat-table {
+    min-width: auto !important;
+    width: 100% !important;
+}
+
+.mat-header-row {
+    width: 100%;
+}
+
+.mat-row {
+    width: 100%;
+}
+
+.menuPhoto {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: none;
+}
+
+.mat-column-cantidad {
+    flex: 0 0 25% !important;
+    min-width: 104px !important;
+    padding-right: 0 !important;
+    width: 20%;
+}
+
+.mat-column-precio {
+    flex: 0 0 25% !important;
+    min-width: 104px !important;
+}
+
+.mat-column-tipo {
+    flex: 0 0 25% !important;
+    min-width: 104px !important;
+}

@@ -1,0 +1,23 @@
+#counter {
+    appearance: textfield;
+    border: none;
+    border: 2px solid rgb(172, 172, 172);
+    border-radius: 20px;
+    // width: 10vw;
+}
+
+#counterContainer {
+    border-radius: 20px;
+    display: flex;
+    width: 45%;
+}
+
+.button {
+    border: 2px solid rgb(172, 172, 172);
+}
+
+// @media(max-width: 1860px) {
+//     #counter {
+//         width: 15vw;
+//     }
+// }

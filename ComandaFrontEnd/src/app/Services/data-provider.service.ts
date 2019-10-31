@@ -10,7 +10,7 @@ export class DataProviderService {
   private adminCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Usuarios', subtitle: 'Administracion de usuarios', imgPath: '../../assets/users.jpg', callback: () => this.redirect('Access')},
     {title: 'Registros', subtitle: 'Administrar registros de usuarios', imgPath: '../../assets/registers.jpg', callback: () => this.redirect('Access')},
-    {title: 'Menu', subtitle: 'Administrar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Access')},
+    {title: 'Menu', subtitle: 'Administrar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Menu')},
     {title: 'Mesas', subtitle: 'Administrar mesas', imgPath: '../../assets/table.jpg', callback: () => this.redirect('Access')},
     {title: 'Estadisticas', subtitle: 'Consultar estadisticas del sistema', imgPath: '../../assets/stats.jpg',
     callback: () => this.redirect('Access')}];
@@ -22,7 +22,7 @@ export class DataProviderService {
   private clientCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Pedido', subtitle: 'Consulta cuanto tiempo falta para que tu pedido este listo', imgPath: '../../assets/timer.jpg',
     callback: () => this.redirect('Access')},
-    {title: 'Menu', subtitle: 'Consultar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Access')},
+    {title: 'Menu', subtitle: 'Consultar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Menu')},
   ];
 
   private cocineroCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
@@ -31,13 +31,13 @@ export class DataProviderService {
   ];
 
   private mozoCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
-    {title: 'Pedidos', subtitle: 'Administrar pedidos', imgPath: '../../assets/pedidos.jpg', callback: () => this.redirect('Access')}
+    {title: 'Pedidos', subtitle: 'Administrar pedidos', imgPath: '../../assets/pedidos.jpg', callback: () => this.redirect('generateOrder')}
   ];
 
   private socioCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Pedidos', subtitle: 'Ver todos los pedidos en preparacion', imgPath: '../../assets/pedidos.jpg',
     callback: () => this.redirect('Access')},
-    {title: 'Menu', subtitle: 'Administrar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Access')},
+    {title: 'Menu', subtitle: 'Administrar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Menu')},
     {title: 'Mesas', subtitle: 'Cobrar y cerrar mesas', imgPath: '../../assets/table.jpg', callback: () => this.redirect('Access')}
   ];
   public get getAdminCards() {
@@ -65,6 +65,7 @@ export class DataProviderService {
   }
   
   redirect(screen: string) {
+    console.log(screen);
     this.router.navigate([`${screen}`]);
   }
 }

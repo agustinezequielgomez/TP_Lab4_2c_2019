@@ -30,12 +30,12 @@ class PedidoController
         $atributos = $request->getParsedBody();
         $alimentos = pedido::procesarPedidos($atributos);
         $pedido = new pedido(['n_mesa'=>$atributos["n_mesa"],'estado'=>"Pendiente","codigo_pedido"=>pedido::generarCodigoDePedido(),"id_empleado"=>$idMozo,"importe"=>pedido::calcularImporte($alimentos),"pedido_realizado"=>date('H:i:s')]);
-        $pedido->foto = $pedido->subirFoto($request->getUploadedFiles(),"../public/img/");
+        $pedido->foto = $pedido->subirFoto($request->getUploadedFiles(),"./public/img/");
         $pedido->save();
         $request = $request->withAttributes(["id_mesa"=>$atributos["n_mesa"],"estado"=>"con cliente esperando pedido",'id_pedido'=>$pedido->id]);
-        mesaApi::ActualizarEstado($request,$response,$args);
+        MesaController::ActualizarEstado($request,$response,$args);
         alimento::cargarAlimentos($alimentos,$pedido);
-        return $response->withJson("Pedido realizado con exito. Su codigo de pedido es: ".$pedido->codigo_pedido, 200);
+        return $response->withJson($pedido->codigo_pedido, 200);
     }
 
     function ConsultarTiempoEstimado(Request $request,Response $response, $args)

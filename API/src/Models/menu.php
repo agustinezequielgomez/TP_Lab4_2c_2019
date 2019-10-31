@@ -40,5 +40,16 @@ class menu extends \Illuminate\Database\Eloquent\Model
             return true;
         }
     }
+
+    public function subirFoto($archivos, $path)
+    {
+        $nombreFoto = ($archivos["foto"])->getClientFileName();
+        $extension = explode(".",$nombreFoto);
+        $extension = array_reverse($extension)[0];
+        $titulo = ("Menu_".$this->nombre."_".$this->tipo.'.'.$extension);
+        $path .= $titulo;
+        $archivos["foto"]->moveTo($path);
+        return realpath($path);
+    }
 }
 ?>

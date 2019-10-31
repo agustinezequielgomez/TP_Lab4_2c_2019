@@ -1,0 +1,5 @@
+<div id="counterContainer">
+    <button class="button" mat-mini-fab color="accent" (click)="this.keyUp()"><mat-icon>keyboard_arrow_up</mat-icon></button>
+    <input matInput (change)="this.test()" type="number" id="counter"  class="text-center" [(ngModel)]="this.cantidad" min="0">
+    <button class="button" mat-mini-fab color="accent" id="downButton" (click)="this.keyDown()"><mat-icon>keyboard_arrow_down</mat-icon></button>
+</div>

@@ -11,6 +11,7 @@ $config = ['settings' => ['displayErrorDetails' => true]];
 
 $app = new \Slim\App($config);
 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 $app->add(function ($req, $res, $next) {
     $res = $res->withHeader('Access-Control-Allow-Origin', '*');
     $res = $res->withHeader('Access-Control-Allow-Methods', $req->getHeaderLine('Access-Control-Request-Method'));

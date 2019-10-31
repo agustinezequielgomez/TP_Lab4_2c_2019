@@ -14,7 +14,7 @@ import { AccessScreenComponent } from './Components/access-screen/access-screen.
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatSlideToggleModule,
   MatCheckboxModule, MatSelectModule, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatProgressSpinnerModule,
-  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule, MatRippleModule, MatSidenavModule, MatListModule} from '@angular/material';
+  MatProgressBarModule, MatDividerModule, MatToolbarModule, MatMenuModule, MatIconModule, MatRippleModule, MatSidenavModule, MatListModule, MatTableModule, MatExpansionModule, MatSortModule, MatPaginatorModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadComponent } from './Components/file-upload/file-upload.component';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -31,6 +31,11 @@ import { CardComponent } from './Components/card/card.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { MatIconRegistry } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProductsMenuComponent } from './Components/products-menu/products-menu.component';
+import { ProductsMenuTableComponent } from './Components/products-menu-table/products-menu-table.component';
+import { CounterComponent } from './Components/counter/counter.component';
+import { GenerateOrderComponent } from './Components/generate-order/generate-order.component';
+import { PdfGeneratorComponent } from './Components/pdf-generator/pdf-generator.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     ClientScreenComponent,
     CardComponent,
-    MenuComponent
+    MenuComponent,
+    ProductsMenuComponent,
+    ProductsMenuTableComponent,
+    CounterComponent,
+    GenerateOrderComponent,
+    PdfGeneratorComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +87,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatRippleModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatExpansionModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},

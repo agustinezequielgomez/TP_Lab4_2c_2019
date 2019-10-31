@@ -67,7 +67,7 @@ class empleado extends \Illuminate\Database\Eloquent\Model
         $titulo = ("Empleado_".$this->nombre."_".$this->tipo.'.'.$extension);
         $path .= $titulo;
         $archivos["foto"]->moveTo($path);
-        return $path;
+        return realpath($path);
     }
 }
 ?>

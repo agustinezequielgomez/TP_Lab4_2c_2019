@@ -6,6 +6,7 @@ return function(App $app)
 {
     $app->group('/Mesa',function()
     {
+        $this->get('/', MesaController::class.':GetMesas');
         $this->post('/',MesaController::class.':EnviarUno');
         $this->post('/Cobro',MesaController::class.':cobrarMesa')->add(MWComanda::class.':MWValidarMesa');
         $this->post('/Cierre',MesaController::class.':cierreMesa')->add(MWComanda::class.':MWValidarMesa');
