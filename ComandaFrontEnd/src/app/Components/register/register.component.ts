@@ -6,6 +6,8 @@ import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 import { SnackBarTemplateComponent } from '../snack-bar-template/snack-bar-template.component';
 import { timer } from 'rxjs';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { FileUploadService } from '../../Services/file-upload.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +25,7 @@ export class RegisterComponent implements OnInit {
   public registering = false;
   public recaptcha = false;
   @Output() SuccessfulRegister = new EventEmitter();
-  constructor(private access: AccessService, private snack: DisplaySnackBarService) { }
+  constructor(private access: AccessService, private snack: DisplaySnackBarService, private upload: FileUploadService) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -45,11 +47,13 @@ export class RegisterComponent implements OnInit {
     REQUEST.append('tipo', 'cliente');
     REQUEST.append('foto', this.profilePic);
     this.access.register(REQUEST).subscribe((response) => {
-      timer(1000).subscribe(() => {
-        this.registering = false;
-        this.snack.openSnackBar('Usuario creado con exito.', 'success', 3);
-        this.SuccessfulRegister.emit();
-      })
+      this.upload.uploadFile(this.profilePic, `${environment.USERS_DIRECTORY}${response}`).subscribe((percentage) => {
+        if (percentage === 100) {
+          this.registering = false;
+          this.snack.openSnackBar('Usuario creado con exito.', 'success', 3);
+          this.SuccessfulRegister.emit();
+        }
+      });
     }, (err) => {
       timer(1000).subscribe(() => {
         this.registering = false;

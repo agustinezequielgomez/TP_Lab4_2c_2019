@@ -8,6 +8,7 @@ import { DataShareService } from '../../Services/data-share.service';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
 import { RedirectionServiceService } from '../../Services/redirection-service.service';
 import { StorageService } from '../../Services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +24,13 @@ export class LoginComponent implements OnInit {
   public registering = false;
   private jwt: JwtHelperService = new JwtHelperService();
   constructor(private access: AccessService, public share: DataShareService,
-              private redirection: RedirectionServiceService, private snack: DisplaySnackBarService, private storage: StorageService) { }
+              private redirection: RedirectionServiceService, private snack: DisplaySnackBarService, private storage: StorageService,
+              private router: Router) { }
 
   ngOnInit() {
     if (!this.jwt.isTokenExpired(localStorage.getItem('token'))) {
       this.processToken(localStorage.getItem('token'));
-      this.redirection.redirectionService();
+      this.router.navigate(['Home']);
     }
     this.form = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
       timer(1000).subscribe(() => {
         this.registering = false;
         this.processToken(token);
-        this.redirection.redirectionService();
+        this.router.navigate(['Home']);
       });
     },
     (err) => {

@@ -5,6 +5,9 @@ import { Menu } from 'src/app/Classes/menu';
 import { isUndefined } from 'util';
 import { OrdersService } from '../../Services/orders.service';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { DataShareService } from '../../Services/data-share.service';
+import { FileUploadService } from '../../Services/file-upload.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-generate-order',
@@ -14,11 +17,13 @@ import { DisplaySnackBarService } from '../../Services/display-snack-bar.service
 export class GenerateOrderComponent implements OnInit {
 
   public mesas: Mesa[];
-  public selectedTable: Mesa;
-  public disableButton = true;
-  public tablePhoto: File;
   public menu: Menu[];
-  constructor(private mesaService: MesaService, private order: OrdersService, private snack: DisplaySnackBarService) { }
+  public tablePhoto: File;
+  public selectedTable: Mesa;
+  public MenuJson: string;
+  public disableButton = true;
+  constructor(private mesaService: MesaService, private order: OrdersService, private snack: DisplaySnackBarService,
+              private share: DataShareService, private fileUpload: FileUploadService) { }
 
   ngOnInit() {
     this.mesaService.getMesas().subscribe((response) => {
@@ -26,11 +31,13 @@ export class GenerateOrderComponent implements OnInit {
         return (mesa.id_pedido === 0);
       });
     });
+    this.share.MenuJsonObservable.subscribe((json) => {
+      this.MenuJson = json;
+    });
   }
 
   updatePedido(menu: Menu[]) {
     this.menu = menu;
-    console.log(this.menu);
     for (const ALIMENTO of menu) {
       if (ALIMENTO.cantidad > 0) {
         this.disableButton = false;
@@ -90,13 +97,19 @@ export class GenerateOrderComponent implements OnInit {
     REQUEST.append('foto', this.tablePhoto);
     REQUEST.append('postre', postre);
     this.order.makeOrder(REQUEST).subscribe((response) => {
-      this.snack.openSnackBar(`¡Pedido realizado con exito! Entreguele este codigo de pedido al cliente: ${response}`, 'success', 3);
-      this.mesaService.getMesas().subscribe((tables) => {
-        this.mesas = tables.filter((mesa) => {
-          return (mesa.id_pedido === 0);
-        });
+      console.log(response);
+      this.fileUpload.uploadFile(this.tablePhoto, `${environment.ORDERS_DIRECTORY}${response.foto}`).subscribe((percentage) => {
+        if (percentage === 100) {
+          this.snack.openSnackBar(`¡Pedido realizado con exito! Entreguele este codigo de pedido al cliente: ${response.codigo}`, 'success', 3);
+          this.mesaService.getMesas().subscribe((tables) => {
+            this.mesas = tables.filter((mesa) => {
+              return (mesa.id_pedido === 0);
+            });
+          });
+        }
       });
     }, (err) => {
+      console.log(err);
       this.snack.openSnackBar('Hubo un error agregando el pedido. Intentelo nuevamente', 'error', 1);
     });
   }

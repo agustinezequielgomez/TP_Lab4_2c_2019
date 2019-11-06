@@ -3,6 +3,8 @@ import { DataShareService } from '../../Services/data-share.service';
 import { StorageService } from '../../Services/storage.service';
 import { Router } from '@angular/router';
 import { MenuComponent } from '../menu/menu.component';
+import { DataProviderService } from '../../Services/data-provider.service';
+import { StatsService } from '../../Services/stats.service';
 
 @Component({
   selector: 'app-header',
@@ -12,12 +14,18 @@ import { MenuComponent } from '../menu/menu.component';
 export class HeaderComponent implements OnInit {
 
   @ViewChild('menu', {static: false}) menu: MenuComponent;
-  @Input() menuTemplate: string;
-  @Input() importes;
+  public menuTemplate: string;
+  @Input() incomes;
   public userName = this.storage.getSessionStorage('data').nombre;
-  constructor(public storage: StorageService, private router: Router) { }
+  constructor(public storage: StorageService, private router: Router, private stats: StatsService) { }
 
   ngOnInit() {
+    this.menuTemplate = this.storage.getSessionStorage('data').role;
+    if (this.menuTemplate === 'socio') {
+      this.stats.getIncomes().subscribe((incomes) => {
+        this.incomes = incomes;
+      });
+    }
   }
 
   logOut() {
@@ -32,5 +40,5 @@ export class HeaderComponent implements OnInit {
     } else {
       this.menu.sideNav.open();
     }
-  } 
+  }
 }

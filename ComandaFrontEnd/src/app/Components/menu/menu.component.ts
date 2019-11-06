@@ -15,13 +15,13 @@ export class MenuComponent implements OnInit {
 
   @ViewChild('sideNav', {static: false}) sideNav: MatSidenav;
   @Input() template;
-  @Input() importes;
+  @Input() incomes;
   public faBeer = faBeer;
   public clipboard = faClipboardList;
   constructor(public storage: StorageService, private router: Router) { }
 
   ngOnInit() {
-    
+
   }
 
   logOut() {

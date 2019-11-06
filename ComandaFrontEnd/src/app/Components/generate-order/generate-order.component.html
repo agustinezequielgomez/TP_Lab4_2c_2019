@@ -1,4 +1,4 @@
-<app-header [menuTemplate]="'mozo'"></app-header>
+<app-header></app-header>
 <div id="container" class="container-fluid">
     <div class="help">
     <mat-form-field class="w-75" appearance="legacy">
@@ -15,9 +15,9 @@
                 <mat-panel-title>Menu</mat-panel-title>
                 <mat-panel-description>Seleccione los alimentos a ordenar</mat-panel-description>
             </mat-expansion-panel-header>
-            <app-products-menu-table (updatedMenu)="this.updatePedido($event)" [order]="true"></app-products-menu-table>
+            <app-products-menu-table (updatedMenu)="this.updatePedido($event)"></app-products-menu-table>
         </mat-expansion-panel>
     </mat-accordion>
     <button id="orderButton" mat-raised-button [disabled]="this.disableButton || this.validateInformation()" color="accent" (click)="this.orderFood()">Hacer pedido</button>
-    <app-pdf-generator [menu]="this.menu" [cols]="['ID', 'Nombre', 'Tipo', 'Precio']"></app-pdf-generator>
+    <app-pdf-generator [objects]="this.menu" [fileName]="'menu'" [cols]="['ID', 'Nombre', 'Tipo', 'Precio']"></app-pdf-generator>
 </div>

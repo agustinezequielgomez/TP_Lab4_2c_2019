@@ -1,4 +1,4 @@
-<app-file-upload (fileSelected)="this.getProfilePic($event)"></app-file-upload>
+<app-file-upload [displayUploadedFoto]="'true'" [message]="'Subir foto de perfil'" (fileSelected)="this.getProfilePic($event)"></app-file-upload>
 <form [formGroup]="this.form">
     <p>
         <mat-form-field appearance="outline">

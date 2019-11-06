@@ -11,7 +11,7 @@ export class StatsService {
 
   constructor(private http: HttpService) { }
 
-  getImportesTotales(): Observable<number> {
+  getIncomes(): Observable<number> {
     return this.http.get<number>(`${environment.API_URL}/Consultas/ImportesTotales`);
   }
 }

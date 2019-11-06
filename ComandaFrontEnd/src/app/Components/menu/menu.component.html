@@ -2,18 +2,18 @@
     <mat-sidenav #sideNav [disableClose]="true" [mode]="'over'" [position]="'start'" [fixedInViewport]="true" fixedTopGap="64">
         <mat-nav-list>
             <span [ngSwitch]="this.template">
-                    <div *ngSwitchCase="'admin'">
+                    <div *ngSwitchCase="'administrador'">
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">person</mat-icon>&nbsp;Usuarios</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">list</mat-icon>&nbsp;Registros</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'" fontSet="material-icons-round">bar_chart_round</mat-icon>&nbsp;Estadisticas</mat-list-item>
                     </div>
-                    <div *ngSwitchCase="'client'">
+                    <div *ngSwitchCase="'cliente'">
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                     </div>
-                    <div *ngSwitchCase="'beerMan'">
+                    <div *ngSwitchCase="'cervecero'">
                         <mat-list-item class="menuItem"><fa-icon [icon]="faBeer"></fa-icon>&nbsp;Cervezas</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cocinero'">
