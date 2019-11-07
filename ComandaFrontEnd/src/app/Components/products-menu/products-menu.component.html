@@ -1,4 +1,5 @@
 <app-header></app-header>
 <div class="container-fluid">
+    <app-pdf-generator *ngIf="this.generatePdf === true" [cols]="['id', 'nombre', 'tipo', 'precio']" [fileName]="'menu'" [objects]="this.menu"></app-pdf-generator>
     <app-products-menu-table></app-products-menu-table>
 </div>

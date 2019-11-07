@@ -25,7 +25,6 @@ export class InterceptorService implements HttpInterceptor {
     let REQUEST = req.clone({
       headers: HEADERS
     });
-    console.log(req.headers);
     if (req.url.includes('/Login') || req.url.includes('/Register')  || req.urlWithParams.includes('/Empleados/?login=true')) {
       return next.handle(REQUEST).pipe(
         retry(1),
@@ -40,7 +39,6 @@ export class InterceptorService implements HttpInterceptor {
     }
 
     const TOKEN = this.storage.getSessionStorage('data').token;
-    console.log(this.authAPIAccess(REQUEST), REQUEST.url);
     if (this.jwtHelper.isTokenExpired(TOKEN)) {
       this.snack.openSnackBar('Autenticacion expirada. Volviendo al login', 'warning', 2);
       timer(3000).subscribe(() => this.router.navigate(['Access']));
@@ -57,6 +55,10 @@ export class InterceptorService implements HttpInterceptor {
             error: err.error,
             status: err.status
           });
+          if (ERROR_RESPONSE.status === 403) {
+            this.snack.openSnackBar('No posees los permisos para realizar esta accion. Volviendo al login', 'warning', 2);
+            timer(3000).subscribe(() => this.router.navigate(['Access']));
+          }
           return throwError(ERROR_RESPONSE);
         })
       );

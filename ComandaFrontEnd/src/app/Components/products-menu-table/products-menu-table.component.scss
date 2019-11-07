@@ -4,6 +4,7 @@ table {
 
 #container {
     padding: 1% 2%;
+    margin-bottom: 1%;
 }
 
 .mat-table__wrapper .mat-table {
@@ -41,4 +42,59 @@ table {
 .mat-column-tipo {
     flex: 0 0 25% !important;
     min-width: 104px !important;
+}
+
+.menuItem-expand-row {
+    border-bottom-width: 0;
+  }
+
+.detailForm {
+    height: 0;
+}
+
+.expandForm {
+    overflow: hidden;
+    display: flex;
+    height: 10%;
+}
+
+@mixin formField {
+    margin-right: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.formField {
+    @include formField();
+    width: 25%;
+}
+
+@mixin formButton {
+    height: 46.0667px;
+    color: white;
+    margin-top: 1.5%;
+    margin-bottom: 1%;
+}
+#updateButton {
+    @include formButton();
+    width: 25%;
+}
+
+.pagButton {
+    left: 5%;
+    position: absolute;
+    float: left;
+    display: flex;
+    color: white;
+    margin-top: 1%;
+}
+
+.formFieldAdd {
+    @include formField();
+    width: 20%;
+}
+
+#addButton {
+    @include formButton();
+    width: 20%;
 }

@@ -29,6 +29,7 @@ import { SnackBarTemplateComponent } from './Components/snack-bar-template/snack
 import { DataShareService } from './Services/data-share.service';
 import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
+import { PaginatorDirective } from './Directives/paginator.directive';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { InterceptorService } from './Services/interceptor.service';
     CounterComponent,
     GenerateOrderComponent,
     PdfGeneratorComponent,
-    HomeComponent
+    HomeComponent,
+    PaginatorDirective
   ],
   imports: [
     BrowserModule,
