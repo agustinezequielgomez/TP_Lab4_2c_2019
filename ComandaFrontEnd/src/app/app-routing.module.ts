@@ -5,6 +5,7 @@ import { GenerateOrderComponent } from './Components/generate-order/generate-ord
 import { HomeComponent } from './Components/home/home.component';
 import { ProductsMenuComponent } from './Components/products-menu/products-menu.component';
 import { AuthGuardService } from './Services/auth-guard.service';
+import { LogsScreenComponent } from './Components/logs-screen/logs-screen.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'Access', component: AccessScreenComponent, canActivate: [AuthGuardService]},
   {path: 'generateOrder', component: GenerateOrderComponent},
   {path: 'Menu', component: ProductsMenuComponent},
+  {path: 'Logs', component: LogsScreenComponent},
   {path: 'Home', component: HomeComponent}
 ];
 

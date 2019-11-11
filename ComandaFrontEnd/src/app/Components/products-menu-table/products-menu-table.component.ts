@@ -12,6 +12,9 @@ import { ExpandRow, ExpandDiv } from '../../Animations/animation';
 import { UpdateMenuRequest } from '../../Classes/update-menu-request';
 import { SnackBarTemplateComponent } from '../snack-bar-template/snack-bar-template.component';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { isUndefined, isNullOrUndefined } from 'util';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-products-menu-table',
@@ -24,14 +27,20 @@ export class ProductsMenuTableComponent implements OnInit {
   @Output() updatedMenu = new EventEmitter<Menu[]>();
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+
   public menu: Menu[];
-  public selectedMenuItem: Menu | null;
   public displayedColumns: string[] = ['foto', 'id', 'nombre', 'tipo', 'precio'];
   public dataSource: MatTableDataSource<Menu>;
-  public adminTemplate = false;
-  public newMenuItem = new Menu();
-  public showAddMenu = false;
+
+  public selectedMenuItem: Menu | null;
   public menuPhoto: File;
+  public newMenuItem = new Menu();
+  public addMenuItemForm: FormGroup;
+
+  public adminTemplate = false;
+  public showAddMenu = false;
+  public enableButton = true;
+  public showSkeleton = true;
   constructor(private menuService: MenuService, public domSanitzaion: DomSanitizer, private storage: StorageService,
               private upload: FileUploadService, private snackbar: DisplaySnackBarService) { }
 
@@ -39,6 +48,11 @@ export class ProductsMenuTableComponent implements OnInit {
     if (this.storage.getSessionStorage('data').role === 'mozo') {
       this.displayedColumns.push('cantidad');
     } else if (this.storage.getSessionStorage('data').role === 'administrador') {
+      this.addMenuItemForm = new FormGroup({
+        nombre: new FormControl('', Validators.required),
+        precio: new FormControl('', [Validators.required, this.NumericValue]),
+        tipo: new FormControl('', Validators.required)
+      });
       this.adminTemplate = true;
     }
 
@@ -53,7 +67,21 @@ export class ProductsMenuTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.menu);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      timer(1500).subscribe(() => this.showSkeleton = false);
     });
+  }
+
+  NumericValue(control: AbstractControl) {
+    if (!isNaN(control.value)) {
+      return null;
+    }
+
+    return { NumericValue: true };
+  }
+
+  ValidatePhoto() {
+    console.log(isUndefined(this.menuPhoto));
+    return isUndefined(this.menuPhoto);
   }
 
   updateQuantity(quantity: number, menuItem: Menu) {
@@ -72,6 +100,7 @@ export class ProductsMenuTableComponent implements OnInit {
   }
 
   updateMenuItem() {
+    this.enableButton = false;
     const REQUEST: UpdateMenuRequest = {
       id: this.selectedMenuItem.id,
       tipo: this.selectedMenuItem.tipo,
@@ -80,7 +109,10 @@ export class ProductsMenuTableComponent implements OnInit {
     };
 
     this.menuService.updateMenuItem(REQUEST).subscribe((response) => {
+      this.enableButton = true;
       this.snackbar.openSnackBar(response, 'success', 3);
+    }, (err) => {
+      this.enableButton = true;
     });
   }
 
@@ -89,18 +121,23 @@ export class ProductsMenuTableComponent implements OnInit {
   }
 
   addMenuItem() {
+    this.enableButton = false;
     const REQUEST = new FormData();
-    REQUEST.append('nombre', this.newMenuItem.nombre);
-    REQUEST.append('tipo', this.newMenuItem.tipo);
-    REQUEST.append('precio', this.newMenuItem.precio.toString());
+    REQUEST.append('nombre', this.addMenuItemForm.controls['nombre'].value);
+    REQUEST.append('tipo', this.addMenuItemForm.controls['tipo'].value);
+    REQUEST.append('precio', this.addMenuItemForm.controls['precio'].value);
     REQUEST.append('foto', this.menuPhoto);
 
     this.menuService.newMenuItem(REQUEST).subscribe((response) => {
       this.upload.uploadFile(this.menuPhoto, `${environment.MENU_DIRECTORY}${response}`).subscribe((percentage) => {
         if (percentage === 100) {
+          this.addMenuItemForm.reset();
+          this.enableButton = true;
           this.menu.push(this.newMenuItem);
           this.snackbar.openSnackBar('Comida agregada al menu con exito', 'success', 3);
         }
+      }, (err) => {
+        this.enableButton = true;
       });
     });
   }

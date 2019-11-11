@@ -56,6 +56,7 @@ export class GenerateOrderComponent implements OnInit {
   }
 
   orderFood() {
+    this.disableButton = true;
     const REQUEST = new FormData();
     let comida = '';
     let vino = '';
@@ -97,9 +98,9 @@ export class GenerateOrderComponent implements OnInit {
     REQUEST.append('foto', this.tablePhoto);
     REQUEST.append('postre', postre);
     this.order.makeOrder(REQUEST).subscribe((response) => {
-      console.log(response);
       this.fileUpload.uploadFile(this.tablePhoto, `${environment.ORDERS_DIRECTORY}${response.foto}`).subscribe((percentage) => {
         if (percentage === 100) {
+          this.disableButton = false;
           this.snack.openSnackBar(`¡Pedido realizado con exito! Entreguele este codigo de pedido al cliente: ${response.codigo}`, 'success', 3);
           this.mesaService.getMesas().subscribe((tables) => {
             this.mesas = tables.filter((mesa) => {
@@ -109,7 +110,7 @@ export class GenerateOrderComponent implements OnInit {
         }
       });
     }, (err) => {
-      console.log(err);
+      this.disableButton = false;
       this.snack.openSnackBar('Hubo un error agregando el pedido. Intentelo nuevamente', 'error', 1);
     });
   }

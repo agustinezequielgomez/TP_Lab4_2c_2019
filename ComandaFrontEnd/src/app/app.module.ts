@@ -1,9 +1,13 @@
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
+         MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
+         MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
+         MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,11 +30,13 @@ import { ProductsMenuTableComponent } from './Components/products-menu-table/pro
 import { ProductsMenuComponent } from './Components/products-menu/products-menu.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { SnackBarTemplateComponent } from './Components/snack-bar-template/snack-bar-template.component';
+import { PaginatorDirective } from './Directives/paginator.directive';
 import { DataShareService } from './Services/data-share.service';
 import { HttpService } from './Services/http.service';
 import { InterceptorService } from './Services/interceptor.service';
-import { PaginatorDirective } from './Directives/paginator.directive';
-
+import { LogsScreenComponent } from './Components/logs-screen/logs-screen.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { LogDatePipe } from './Pipes/log-date.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +55,9 @@ import { PaginatorDirective } from './Directives/paginator.directive';
     GenerateOrderComponent,
     PdfGeneratorComponent,
     HomeComponent,
-    PaginatorDirective
+    PaginatorDirective,
+    LogsScreenComponent,
+    LogDatePipe
   ],
   imports: [
     BrowserModule,
@@ -84,14 +92,16 @@ import { PaginatorDirective } from './Directives/paginator.directive';
     MatSortModule,
     MatPaginatorModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
               {provide: RECAPTCHA_SETTINGS, useValue: {siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
               theme: 'light', size: 'normal', type: 'image', badge: 'inline'} as RecaptchaSettings},
               {provide: RECAPTCHA_LANGUAGE, useValue: 'es'},
-              {provide: StorageBucket, useValue: 'gs://labo-iv.appspot.com'}],
+              {provide: StorageBucket, useValue: 'gs://labo-iv.appspot.com'},
+              {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   entryComponents: [SnackBarTemplateComponent]
 })

@@ -1,13 +1,11 @@
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
-import { Observable, throwError, timer, EMPTY } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { DataShareService } from './data-share.service';
 import { Router } from '@angular/router';
-import { StorageService } from './storage.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { EMPTY, Observable, throwError, timer } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { DisplaySnackBarService } from './display-snack-bar.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
