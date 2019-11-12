@@ -6,6 +6,7 @@ import { HomeComponent } from './Components/home/home.component';
 import { ProductsMenuComponent } from './Components/products-menu/products-menu.component';
 import { AuthGuardService } from './Services/auth-guard.service';
 import { LogsScreenComponent } from './Components/logs-screen/logs-screen.component';
+import { PrepareFoodsComponent } from './Components/prepare-foods/prepare-foods.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path: 'generateOrder', component: GenerateOrderComponent},
   {path: 'Menu', component: ProductsMenuComponent},
   {path: 'Logs', component: LogsScreenComponent},
-  {path: 'Home', component: HomeComponent}
+  {path: 'Home', component: HomeComponent},
+  {path: 'Prepare', component: PrepareFoodsComponent}
 ];
 
 @NgModule({

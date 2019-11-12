@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FoodService } from '../../Services/food.service';
 
 @Component({
   selector: 'app-perpare-food',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PerpareFoodComponent implements OnInit {
 
-  constructor() { }
+  constructor(private foodService: FoodService) { }
 
   ngOnInit() {
+    this.foodService.getFoods().subscribe((response) => {
+      console.log(response);
+    });
   }
 
 }
