@@ -25,7 +25,7 @@ import { timer } from 'rxjs';
 export class ProductsMenuTableComponent implements OnInit {
 
   @Output() updatedMenu = new EventEmitter<Menu[]>();
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   public menu: Menu[];
@@ -67,7 +67,9 @@ export class ProductsMenuTableComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.menu);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      timer(1500).subscribe(() => this.showSkeleton = false);
+      timer(1500).subscribe(() => {
+        this.showSkeleton = false;
+      });
     });
   }
 
@@ -80,7 +82,6 @@ export class ProductsMenuTableComponent implements OnInit {
   }
 
   ValidatePhoto() {
-    console.log(isUndefined(this.menuPhoto));
     return isUndefined(this.menuPhoto);
   }
 

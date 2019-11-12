@@ -1,17 +1,19 @@
 <mat-sidenav-container [hasBackdrop]="true" (backdropClick)="this.sideNav.close()">
-    <mat-sidenav #sideNav [disableClose]="true" [mode]="'over'" [position]="'start'" [fixedInViewport]="true" fixedTopGap="64">
+    <mat-sidenav #sideNav [disableClose]="true" [mode]="'over'" [position]="'start'" [fixedInViewport]="true" [fixedTopGap]="64">
         <mat-nav-list>
+            <mat-list-item class="menuItem" (click)="this.redirect('Home')"><mat-icon [color]="'accent'">home</mat-icon>&nbsp;Home</mat-list-item>
+            <mat-divider class="menuItem"></mat-divider>
             <span [ngSwitch]="this.template">
                     <div *ngSwitchCase="'administrador'">
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">person</mat-icon>&nbsp;Usuarios</mat-list-item>
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">list</mat-icon>&nbsp;Registros</mat-list-item>
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                        <mat-list-item (click)="this.redirect('')" class="menuItem"><mat-icon [color]="'accent'">person</mat-icon>&nbsp;Usuarios</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Logs')" class="menuItem"><mat-icon [color]="'accent'">list</mat-icon>&nbsp;Registros</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'" fontSet="material-icons-round">bar_chart_round</mat-icon>&nbsp;Estadisticas</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cliente'">
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cervecero'">
                         <mat-list-item class="menuItem"><fa-icon [icon]="faBeer"></fa-icon>&nbsp;Cervezas</mat-list-item>
@@ -20,13 +22,13 @@
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">fastfood</mat-icon>&nbsp;Comidas</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'mozo'">
-                        <mat-list-item class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
+                        <mat-list-item (click)="this.redirect('generateOrder')" class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'socio'">
-                        <mat-list-item class="moneyMenuItem" [disableRipple]="true"><mat-icon [color]="'accent'">attach_money</mat-icon>&nbsp;Importes totales:&nbsp; <div class="money">${{this.importes}}</div></mat-list-item>
+                        <mat-list-item class="moneyMenuItem" [disableRipple]="true"><mat-icon [color]="'accent'">attach_money</mat-icon>&nbsp;Importes totales:&nbsp; <div class="money">${{this.incomes}}</div></mat-list-item>
                         <mat-divider class="menuItem"></mat-divider>                
                         <mat-list-item class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
                     </div>
                 </span>

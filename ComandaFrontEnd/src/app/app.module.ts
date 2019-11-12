@@ -37,6 +37,7 @@ import { InterceptorService } from './Services/interceptor.service';
 import { LogsScreenComponent } from './Components/logs-screen/logs-screen.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LogDatePipe } from './Pipes/log-date.pipe';
+import { PerpareFoodComponent } from './Components/perpare-food/perpare-food.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { LogDatePipe } from './Pipes/log-date.pipe';
     HomeComponent,
     PaginatorDirective,
     LogsScreenComponent,
-    LogDatePipe
+    LogDatePipe,
+    PerpareFoodComponent
   ],
   imports: [
     BrowserModule,

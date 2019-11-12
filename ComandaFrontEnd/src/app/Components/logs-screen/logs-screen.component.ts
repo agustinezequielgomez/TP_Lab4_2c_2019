@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { Log } from '../../Classes/log';
 import { LogsService } from '../../Services/logs.service';
@@ -9,7 +9,6 @@ import { LogsService } from '../../Services/logs.service';
   styleUrls: ['./logs-screen.component.scss']
 })
 export class LogsScreenComponent implements OnInit {
-
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 

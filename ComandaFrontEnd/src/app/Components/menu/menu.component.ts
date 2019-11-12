@@ -29,4 +29,8 @@ export class MenuComponent implements OnInit {
     this.storage.deleteSessionStorage('data');
     this.router.navigate(['Access']);
   }
+
+  redirect(screen: string) {
+    this.router.navigate([screen]);
+  }
 }

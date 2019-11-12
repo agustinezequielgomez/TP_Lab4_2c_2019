@@ -7,10 +7,8 @@ import * as moment from 'moment';
 export class LogDatePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    const DATE = moment(value);
-    const NOW = moment();
-    const DIFF = NOW.diff(DATE);
-    console.log(DIFF, NOW, DATE);
+    moment.locale('es');
+    return (moment(value).fromNow());
   }
 
 }
