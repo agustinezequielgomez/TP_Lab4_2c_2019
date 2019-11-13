@@ -1,1 +1,41 @@
 <app-header></app-header>
+<div class="container-fluid">
+    <h2 class="text-left">Alimentos a preparar</h2>
+        <mat-accordion>
+            <mat-expansion-panel (closed)="this.renderEstimatedMinutes = false" *ngFor="let order of this.pendingFoodsMap | keyvalue" class="deployable">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Pedido {{order.key}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let food of order.value">{{food.nombre_alimento | titlecase}}</mat-list-item>
+                </mat-nav-list>
+                <mat-form-field id="formField" [@expandForm] *ngIf="this.renderEstimatedMinutes === true" color="primary" appearance="outline">
+                    <mat-label>Tiempo estimado</mat-label>
+                    <input matInput type="number" min="0" [(ngModel)]="this.estimatedMinutes">
+                </mat-form-field>
+                <button mat-raised-button class="prepareButton" [disabled]="!this.isNotNull() && this.renderEstimatedMinutes === true" color="accent" (click)="this.prepareFood(order.key)">Preparar</button>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <div *ngIf="this.inProgressFoodsMap.size > 0">
+                <h2 class="text-left">Alimentos a en preparacion</h2>
+        <mat-accordion>
+            <mat-expansion-panel (closed)="this.renderEstimatedMinutes = false" *ngFor="let order of this.inProgressFoodsMap | keyvalue" class="deployable">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Pedido {{order.key}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let food of order.value">{{food.nombre_alimento | titlecase}}</mat-list-item>
+                </mat-nav-list>
+                <mat-form-field id="formField" [@expandForm] *ngIf="this.renderEstimatedMinutes === true" color="primary" appearance="outline">
+                    <mat-label>Tiempo estimado</mat-label>
+                    <input matInput type="number" min="0" [(ngModel)]="this.estimatedMinutes">
+                </mat-form-field>
+                <button mat-raised-button class="prepareButton" [disabled]="!this.isNotNull() && this.renderEstimatedMinutes === true" color="accent" (click)="this.prepareFood(order.key)">Preparar</button>
+            </mat-expansion-panel>
+        </mat-accordion>
+        </div>
+</div>

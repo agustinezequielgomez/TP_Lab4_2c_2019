@@ -12,3 +12,10 @@ export const ExpandDiv = trigger('expandDiv', [
     transition(':leave', [style({height: '*', opacity: '1'}),
     animate('1s ease-in-out', style({height: '0px', minHeight: '0', opacity: '0'}))]),
 ]);
+
+export const ExpandForm = trigger('expandForm', [
+  transition(':enter', [style({height: '0px', opacity: '0'}),
+              animate('2s ease-in-out', style({height: '77.0667px', opacity: '1'}))]),
+  transition(':leave', [style({height: '77.0667px', opacity: '1'}),
+  animate('1s ease-in-out', style({height: '0px', opacity: '0'}))]),
+]);
