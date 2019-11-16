@@ -38,6 +38,7 @@ import { LogsScreenComponent } from './Components/logs-screen/logs-screen.compon
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LogDatePipe } from './Pipes/log-date.pipe';
 import { PrepareFoodsComponent } from './Components/prepare-foods/prepare-foods.component';
+import { DisableOrdersDirective } from './Directives/disable-orders.directive';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { PrepareFoodsComponent } from './Components/prepare-foods/prepare-foods.
     PaginatorDirective,
     LogsScreenComponent,
     LogDatePipe,
-    PrepareFoodsComponent
+    PrepareFoodsComponent,
+    DisableOrdersDirective
   ],
   imports: [
     BrowserModule,

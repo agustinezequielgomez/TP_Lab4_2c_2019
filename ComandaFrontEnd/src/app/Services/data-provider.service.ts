@@ -16,7 +16,7 @@ export class DataProviderService {
     callback: () => this.redirect('Access')}];
 
   private beerManCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
-    {title: 'Cervezas', subtitle: 'Preparar cervezas y ver cervezas restantes', imgPath: '../../assets/52.jpg', callback: () => this.redirect('Access')}];
+    {title: 'Cervezas', subtitle: 'Preparar cervezas y ver cervezas restantes', imgPath: '../../assets/52.jpg', callback: () => this.redirect('Prepare')}];
   constructor(private router: Router) { }
 
   private clientCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
@@ -27,7 +27,7 @@ export class DataProviderService {
 
   private cocineroCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Comidas', subtitle: 'Preparar nuevas comidas y ver comidas a preparar', imgPath: '../../assets/food.jpg',
-     callback: () => this.redirect('Access')}
+     callback: () => this.redirect('Prepare')}
   ];
 
   private mozoCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [

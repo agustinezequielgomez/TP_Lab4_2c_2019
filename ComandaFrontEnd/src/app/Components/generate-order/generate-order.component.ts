@@ -22,6 +22,7 @@ export class GenerateOrderComponent implements OnInit {
   public selectedTable: Mesa;
   public MenuJson: string;
   public disableButton = true;
+  public sendingData = false;
   constructor(private mesaService: MesaService, private order: OrdersService, private snack: DisplaySnackBarService,
               private share: DataShareService, private fileUpload: FileUploadService) { }
 
@@ -56,6 +57,7 @@ export class GenerateOrderComponent implements OnInit {
   }
 
   orderFood() {
+    this.sendingData = true;
     this.disableButton = true;
     const REQUEST = new FormData();
     let comida = '';
@@ -100,6 +102,7 @@ export class GenerateOrderComponent implements OnInit {
     this.order.makeOrder(REQUEST).subscribe((response) => {
       this.fileUpload.uploadFile(this.tablePhoto, `${environment.ORDERS_DIRECTORY}${response.foto}`).subscribe((percentage) => {
         if (percentage === 100) {
+          this.sendingData = false;
           this.disableButton = false;
           this.snack.openSnackBar(`¡Pedido realizado con exito! Entreguele este codigo de pedido al cliente: ${response.codigo}`, 'success', 3);
           this.mesaService.getMesas().subscribe((tables) => {

@@ -14,4 +14,28 @@
 
 #formField {
     width: 100%;
+    margin-top: 1%;
+}
+
+#pendingDescription {
+    color: #ee8637;
+}
+
+#inProgressDescription {
+    color: #0ec704;
+}
+
+#orderDisableText {
+    text-align: center;
+    position: relative;
+}
+
+#orderDisableDiv {
+    z-index: 999;
+    background-color: rgba(179, 178, 178, 0.438);
+}
+
+.disabledAccordion {
+    position: relative;
+    z-index: -5;
 }

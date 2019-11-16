@@ -32,11 +32,11 @@ export class PdfGeneratorComponent implements OnInit {
     for (const obj of this.objects) {
       temp = [];
       for (const column of this.cols) {
-        temp.push(obj[column.toLocaleLowerCase()]);
+        temp.push(obj[column.toLocaleLowerCase()].toString().toUpperCase());
       }
       ROWS.push(temp);
     }
-    this.generator.autoTable(this.cols, ROWS, {startY: 10});
+    this.generator.autoTable(this.cols, ROWS, {startY: 10, theme: 'grid', headStyles: {fillColor: [55, 159, 238]}});
     this.generator.save(`${this.fileName}.pdf`);
   }
 

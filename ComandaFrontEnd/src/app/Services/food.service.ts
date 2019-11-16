@@ -19,4 +19,8 @@ export class FoodService {
     return this.http.post(`${environment.API_URL}/Alimentos/`, {id_pedido: orderNumber, tiempo_estimado: estimation})
                           .pipe(response => response);
   }
+
+  finalizePreparation() {
+    return this.http.post(`${environment.API_URL}/Alimentos/TerminarPreparacion`, null).pipe(response => response);
+  }
 }
