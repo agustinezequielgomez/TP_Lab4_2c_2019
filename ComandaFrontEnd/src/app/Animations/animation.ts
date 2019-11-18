@@ -1,4 +1,4 @@
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate, keyframes, query, animateChild, group } from '@angular/animations';
 
 export const ExpandRow  = trigger('detailExpand', [
         state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -36,3 +36,55 @@ export const FormOut = trigger('formOut', [
       ]))
   ])
 ]);
+
+export const slideInAnimation =
+  trigger('routeAnimations', [
+    transition('RightSide => LeftSide', [
+      style({ position: 'relative' }),
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%'
+        })
+      ]),
+      query(':enter', [
+        style({ left: '-100%'})
+      ]),
+      query(':leave', animateChild()),
+      group([
+        query(':leave', [
+          animate('.75s ease-in-out', style({ left: '100%'}))
+        ]),
+        query(':enter', [
+          animate('.75s ease-in-out', style({ left: '0%'}))
+        ])
+      ]),
+      query(':enter', animateChild()),
+    ]),
+    transition('LeftSide => RightSide', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+          style({
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%'
+          })
+        ]),
+        query(':enter', [
+          style({ left: '100%'})
+        ]),
+        query(':leave', animateChild()),
+        group([
+          query(':leave', [
+            animate('.75s ease-in-out', style({ left: '-100%'}))
+          ]),
+          query(':enter', [
+            animate('.75s ease-in-out', style({ left: '0%'}))
+          ])
+        ]),
+        query(':enter', animateChild()),
+      ]),
+  ]);

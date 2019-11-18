@@ -1,13 +1,48 @@
 .container-fluid {
-    background: linear-gradient(270deg, #0b8ef1, #ee8637 50%, #781dee, #3743ee);
-    background-size: 800%;
+    // background: linear-gradient(270deg, #0b8ef1, #ee8637 50%, #781dee, #3743ee);
+    // background-size: 800%;
     height: 100%;
     width: 100%;
     padding-top: 1rem;
-    -webkit-animation: MovingBackground 30s ease infinite;
-    -moz-animation: MovingBackground 30s ease infinite;
-    animation: MovingBackground 30s ease infinite;
+    // -webkit-animation: MovingBackground 30s ease infinite;
+    // -moz-animation: MovingBackground 30s ease infinite;
+    // animation: MovingBackground 30s ease infinite;
 }
+
+.color-change-5x {
+	-webkit-animation: color-change-5x 8s ease-in-out infinite alternate both;
+	        animation: color-change-5x 8s ease-in-out infinite alternate both;
+}
+
+ @-webkit-keyframes color-change-5x {
+    0% {
+      background: #0b8ef1;
+    }
+    33% {
+      background: #ee8637;
+    }
+    66% {
+      background: #781dee;
+    }
+    100% {
+      background: #3743ee;
+    }
+  }
+  @keyframes color-change-5x {
+    0% {
+        background: #0b8ef1;
+      }
+      33% {
+        background: #ee8637;
+      }
+      66% {
+        background: #781dee;
+      }
+      100% {
+        background: #3743ee;
+      }
+  }
+  
 
 @-webkit-keyframes MovingBackground {
     0% {

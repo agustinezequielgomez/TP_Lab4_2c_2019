@@ -58,11 +58,6 @@ export class ProductsMenuTableComponent implements OnInit {
 
     this.menuService.getMenu().subscribe((response) => {
       this.menu = response;
-      for (const food of this.menu) {
-        this.upload.downloadFile(`${environment.MENU_DIRECTORY}${food.path}`).subscribe((photoResponse) => {
-          food.path = photoResponse;
-        });
-      }
       this.updatedMenu.emit(this.menu);
       this.dataSource = new MatTableDataSource(this.menu);
       this.dataSource.sort = this.sort;

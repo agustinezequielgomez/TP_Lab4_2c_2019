@@ -92,7 +92,8 @@ export class InterceptorService implements HttpInterceptor {
 
       case 'mozo':
         if (request.url.includes('/Pedidos') && !request.url.includes('/Pedidos/TiempoEstimado') ||
-        request.url.includes('/Mesa') && request.method === 'GET' || request.url.includes('Menu/') && request.method === 'GET') {
+        request.url.includes('/Mesa') && request.method === 'GET' || request.url.includes('Menu/') && request.method === 'GET' ||
+        request.url.includes('/Alimentos') && request.method === 'GET') {
           return true;
         } else {
           return false;

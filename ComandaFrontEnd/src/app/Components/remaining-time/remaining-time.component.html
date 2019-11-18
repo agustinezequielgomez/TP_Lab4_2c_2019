@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <p mat-dialog-title class="title">Consultar tiempo estimado</p>
+        <span class="spacer"></span>
+        <button mat-icon-button color="accent" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="this.fetching" [ngStyle]="{'margin-top': '5%'}"></div>
+<ngx-skeleton-loader *ngIf="this.fetching" [appearance]="'lines'" [count]="1" [theme]="{'height': '5vh', 'width': '75%', 'left': '13%'}"></ngx-skeleton-loader>
+<div *ngIf="this.gotThatTime === false && this.fetching === false" class="containers" mat-dialog-content>
+    <mat-form-field class="formField" appearance="outline">
+        <mat-label>Codigo de mesa</mat-label>
+        <input matInput [(ngModel)]="this.tableCode">
+    </mat-form-field>
+    <mat-form-field class="formField" appearance="outline">
+        <mat-label>Codigo de pedido</mat-label>
+        <input matInput [(ngModel)]="this.orderCode">
+    </mat-form-field>
+</div>
+<div *ngIf="this.gotThatTime === false && this.fetching === false" class="containers" mat-dialog-actions>
+    <button class="THEButton" mat-raised-button color="accent" [disabled]="this.disableButton()" (click)="getRemainingTime()">Consultar</button>
+</div>
+<div *ngIf="this.gotThatTime" class="containers" mat-dialog-content>
+    <p class="text-center" [ngStyle]="{'font-size': '180%'}">Faltan:</p>
+    <p class="text-center" [ngStyle]="{'font-size': '250%'}">{{this.remainingTime}}</p>
+    <p class="text-center" [ngStyle]="{'font-size': '180%'}">Para que tu pedido este listo!</p>
+</div>

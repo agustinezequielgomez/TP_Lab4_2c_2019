@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
          MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
          MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
-         MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+         MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -39,6 +39,12 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LogDatePipe } from './Pipes/log-date.pipe';
 import { PrepareFoodsComponent } from './Components/prepare-foods/prepare-foods.component';
 import { DisableOrdersDirective } from './Directives/disable-orders.directive';
+import { PhotoPipePipe } from './Pipes/photo-pipe.pipe';
+import { OrdersComponent } from './Components/orders/orders.component';
+import { StateDirective } from './Directives/state.directive';
+import { RemainingTimeComponent } from './Components/remaining-time/remaining-time.component';
+import { MatDialogConfig } from '@angular/material';
+import { RemainingTimePipe } from './Pipes/remaining-time.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +67,12 @@ import { DisableOrdersDirective } from './Directives/disable-orders.directive';
     LogsScreenComponent,
     LogDatePipe,
     PrepareFoodsComponent,
-    DisableOrdersDirective
+    DisableOrdersDirective,
+    PhotoPipePipe,
+    OrdersComponent,
+    StateDirective,
+    RemainingTimeComponent,
+    RemainingTimePipe
   ],
   imports: [
     BrowserModule,
@@ -95,6 +106,7 @@ import { DisableOrdersDirective } from './Directives/disable-orders.directive';
     MatExpansionModule,
     MatSortModule,
     MatPaginatorModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     NgxSkeletonLoaderModule
@@ -107,7 +119,7 @@ import { DisableOrdersDirective } from './Directives/disable-orders.directive';
               {provide: StorageBucket, useValue: 'gs://labo-iv.appspot.com'},
               {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
-  entryComponents: [SnackBarTemplateComponent]
+  entryComponents: [SnackBarTemplateComponent, RemainingTimeComponent]
 })
 export class AppModule {
 }

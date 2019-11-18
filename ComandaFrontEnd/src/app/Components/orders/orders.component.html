@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <ngx-skeleton-loader *ngIf="!this.render" [appearance]="'lines'" [count]="10" [theme]="{'height': '10vh'}"></ngx-skeleton-loader>
+    <div *ngIf="this.render" class="vivify fade-in-fwd">
+        <h2 class="text-left">Listado de pedidos</h2>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let order of this.ordersMap | keyvalue" class="deployable">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Pedido {{order.key.id}}
+                    </mat-panel-title>
+                    <mat-panel-description appState>
+                        {{order.key.estado}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                    <mat-list-item *ngFor="let food of order.value">
+                        <p matLine>{{food.nombre_alimento | titlecase}}</p>
+                        <p matLine>Estado: &nbsp;<span appState>{{food.estado}}</span></p>
+                    </mat-list-item>
+                </mat-nav-list>
+                <button id="deliverButton" mat-raised-button color="accent" [disabled]="enableButton(order.key)" (click)="deliverOrder(order.key.id)">Entregar pedido</button>
+                <button id="cancelButton" mat-raised-button color="warn" [disabled]="enableCancelationButton(order.key)" (click)="cancelOrder(order.key.id)">Cancelar pedido</button>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

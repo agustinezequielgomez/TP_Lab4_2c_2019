@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { faBeer, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import { DataProviderService } from '../../Services/data-provider.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +19,7 @@ export class MenuComponent implements OnInit {
   @Input() incomes;
   public faBeer = faBeer;
   public clipboard = faClipboardList;
-  constructor(public storage: StorageService, private router: Router) { }
+  constructor(public storage: StorageService, private router: Router, public provider: DataProviderService) { }
 
   ngOnInit() {
 

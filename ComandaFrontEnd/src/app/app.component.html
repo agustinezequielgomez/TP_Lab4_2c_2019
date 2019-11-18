@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)" [ngStyle]="{'width': '100%', 'height': '100%'}">
+    <router-outlet #outlet="outlet"></router-outlet>
+</div>

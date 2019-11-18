@@ -4,11 +4,13 @@ import { timer } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Employee } from '../../Classes/employee';
 import { AccessService } from '../../Services/access.service';
+import { ExpandForm } from '../../Animations/animation';
 
 @Component({
   selector: 'app-access-screen',
   templateUrl: './access-screen.component.html',
-  styleUrls: ['./access-screen.component.scss']
+  styleUrls: ['./access-screen.component.scss'],
+  animations: [ExpandForm]
 })
 export class AccessScreenComponent implements OnInit {
 

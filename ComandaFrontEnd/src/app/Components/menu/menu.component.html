@@ -13,7 +13,7 @@
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'" fontSet="material-icons-round">bar_chart_round</mat-icon>&nbsp;Estadisticas</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cliente'">
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
+                        <mat-list-item (click)="this.provider.openDialog()" class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
                         <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cervecero'">

@@ -1,0 +1,30 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.containers {
+    width: 95%;
+    padding-left: 5%;
+
+}
+
+.title {
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 2%;
+}
+
+.THEButton, .title {
+    color: white;
+}
+
+.THEButton {
+    margin-top: 3%;
+    width: 90%;
+    margin-left: 4%;
+ }
+
+.formField {
+    margin-top: 3%;
+    width: 43%;
+    margin-left: 7%;
+}

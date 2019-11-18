@@ -7,7 +7,7 @@
         <table mat-table [multiTemplateDataRows]="true" matSort [dataSource]="this.dataSource">
             <ng-container matColumnDef="foto">
                 <th mat-header-cell *matHeaderCellDef>Foto</th>
-                <td mat-cell *matCellDef="let menuItem"><img [src]="this.domSanitzaion.bypassSecurityTrustUrl(menuItem.path)" class="menuPhoto"></td>
+                <td mat-cell *matCellDef="let menuItem"><img src="{{menuItem.path | photoPipe: 'Menu' | async}}" class="menuPhoto"></td>
             </ng-container>
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>

@@ -40,6 +40,12 @@ body {
     color: white;
 }
 
+.remainingTimeDialog {
+    mat-dialog-container {
+        padding: 0 !important;
+    }
+}
+
 @mixin cards {
     mat-card {
         width: 25vw;
