@@ -29,4 +29,5 @@
         </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+    <app-pdf-generator [objects]="this.logs" [fileName]="'logs'" [cols]="['ID', 'ID_Usuario', 'Nombre', 'Fecha_Ingreso']"></app-pdf-generator>
 </div>

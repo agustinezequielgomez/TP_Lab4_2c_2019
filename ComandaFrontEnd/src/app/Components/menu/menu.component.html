@@ -13,7 +13,8 @@
                         <mat-list-item class="menuItem"><mat-icon [color]="'accent'" fontSet="material-icons-round">bar_chart_round</mat-icon>&nbsp;Estadisticas</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cliente'">
-                        <mat-list-item (click)="this.provider.openDialog()" class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
+                        <mat-list-item (click)="this.openDialog()" class="menuItem"><mat-icon [color]="'accent'">timelapse</mat-icon>&nbsp;Tiempo restante</mat-list-item>
+                        <mat-list-item (click)="this.openRateDialog()" class="menuItem"><mat-icon [color]="'accent'">star</mat-icon>&nbsp;Puntuanos</mat-list-item>
                         <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
                     </div>
                     <div *ngSwitchCase="'cervecero'">
@@ -28,9 +29,9 @@
                     <div *ngSwitchCase="'socio'">
                         <mat-list-item class="moneyMenuItem" [disableRipple]="true"><mat-icon [color]="'accent'">attach_money</mat-icon>&nbsp;Importes totales:&nbsp; <div class="money">${{this.incomes}}</div></mat-list-item>
                         <mat-divider class="menuItem"></mat-divider>                
-                        <mat-list-item class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Orders')" class="menuItem"><fa-icon [icon]="clipboard"></fa-icon>&nbsp;Pedidos</mat-list-item>
                         <mat-list-item (click)="this.redirect('Menu')" class="menuItem"><mat-icon [color]="'accent'">restaurant_menu</mat-icon>&nbsp;Menu</mat-list-item>
-                        <mat-list-item class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
+                        <mat-list-item (click)="this.redirect('Tables')" class="menuItem"><mat-icon [color]="'accent'">storefront</mat-icon>&nbsp;Mesas</mat-list-item>
                     </div>
                 </span>
             <mat-divider class="menuItem"></mat-divider>

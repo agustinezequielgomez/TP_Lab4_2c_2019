@@ -46,7 +46,6 @@ export class InterceptorService implements HttpInterceptor {
       REQUEST = req.clone({
         headers: HEADERS
       });
-      console.log(HEADERS);
       return next.handle(REQUEST).pipe(
         retry(1),
         catchError((err) => {
@@ -111,7 +110,8 @@ export class InterceptorService implements HttpInterceptor {
           break;
 
       case 'cliente':
-        if (request.url.includes('/Pedidos/TiempoEstimado') || request.url.includes('/Menu') && request.method === 'GET') {
+        if (request.url.includes('/Pedidos/TiempoEstimado') || request.url.includes('/Menu') && request.method === 'GET' ||
+            request.url.includes('/Rate')) {
           return true;
         } else {
           return false;

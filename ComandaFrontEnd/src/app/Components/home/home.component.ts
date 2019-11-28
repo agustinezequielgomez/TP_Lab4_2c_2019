@@ -43,4 +43,8 @@ export class HomeComponent implements OnInit {
         break;
     }
   }
+
+  test($event) {
+    console.log('RATING => ', $event);
+  }
 }

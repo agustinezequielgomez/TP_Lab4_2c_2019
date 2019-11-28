@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { GenerateOrderResponse } from '../Classes/generate-order-response';
 import { Pedido } from '../Classes/pedido';
+import { ReamainingTimeResponse } from '../Classes/reamaining-time-response';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class OrdersService {
     return this.http.post(`${this.URL}Cancelar`, {id_pedido: orderNumber}).pipe(response => response);
   }
 
-  getRemainingTime(tableCode: string, orderCode: string) {
-    return this.http.get(`${this.URL}TiempoEstimado?codigo_de_pedido=${orderCode}&codigo_mesa=${tableCode}`).pipe(response => response);
+  getRemainingTime(tableCode: string, orderCode: string): Observable<ReamainingTimeResponse> {
+    return this.http.get<ReamainingTimeResponse>(`${this.URL}TiempoEstimado?codigo_de_pedido=${orderCode}&codigo_mesa=${tableCode}`)
+                                                .pipe(response => response);
   }
 }

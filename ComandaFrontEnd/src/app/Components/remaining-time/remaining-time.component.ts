@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { isNull, isUndefined } from 'util';
 import { OrdersService } from '../../Services/orders.service';
@@ -6,6 +6,7 @@ import { DisplaySnackBarService } from '../../Services/display-snack-bar.service
 import * as moment from 'moment';
 import { Time } from '@angular/common';
 import { interval } from 'rxjs';
+import { RateService } from '../../Services/rate.service';
 
 @Component({
   selector: 'app-remaining-time',
@@ -14,6 +15,9 @@ import { interval } from 'rxjs';
 })
 export class RemainingTimeComponent implements OnInit {
 
+  @Input() remainingTimeTemplate = true;
+  @Input() title = 'Consultar tiempo estimado';
+  @Output() youCanRate = new EventEmitter<string>();
   public minutes: number;
   public seconds: number;
   public remainingTime: string;
@@ -22,7 +26,7 @@ export class RemainingTimeComponent implements OnInit {
   public gotThatTime = false;
   public fetching = false;
   constructor(public dialogRef: MatDialogRef<RemainingTimeComponent>, private orderService: OrdersService,
-              private snack: DisplaySnackBarService) { }
+              private snack: DisplaySnackBarService, private rate: RateService) { }
 
   ngOnInit() {
   }
@@ -40,7 +44,17 @@ export class RemainingTimeComponent implements OnInit {
       this.gotThatTime = true;
       this.fetching = false;
     }, (err) => {
-      this.snack.openSnackBar(err.error, 'warning', 2 );
+      this.snack.openSnackBar(err.error, 'warning', 2);
+      this.dialogRef.close();
+    });
+  }
+
+  rateAvailable() {
+    this.fetching = true;
+    this.rate.RateAvailable(this.tableCode).subscribe((response) => {
+      this.youCanRate.emit(this.tableCode);
+    }, (err) => {
+      this.snack.openSnackBar(err.error, 'warning', 2);
       this.dialogRef.close();
     });
   }
@@ -59,4 +73,5 @@ export class RemainingTimeComponent implements OnInit {
       }
     });
   }
+
 }

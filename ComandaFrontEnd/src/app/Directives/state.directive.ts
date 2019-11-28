@@ -18,8 +18,14 @@ export class StateDirective implements AfterViewInit {
           this.host.nativeElement.style.color = '#0ec704';
           break;
 
+        case 'Entregado':
+          this.host.nativeElement.style.color = '#0ec704';
+          this.host.nativeElement.innerText = 'Entregado ✔️';
+          break;
+
         case 'Cancelado':
           this.host.nativeElement.style.color = 'red';
+          this.host.nativeElement.innerText = 'Cancelado ❌';
           break;
       }
     }

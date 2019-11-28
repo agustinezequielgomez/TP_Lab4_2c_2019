@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDividerModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
          MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
          MatRippleModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule,
-         MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+         MatToolbarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS, MatTabsModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -45,6 +45,10 @@ import { StateDirective } from './Directives/state.directive';
 import { RemainingTimeComponent } from './Components/remaining-time/remaining-time.component';
 import { MatDialogConfig } from '@angular/material';
 import { RemainingTimePipe } from './Pipes/remaining-time.pipe';
+import { TablesComponent } from './Components/tables/tables.component';
+import { RateComponent } from './Components/rate/rate.component';
+import { StarRatingModule, StarRatingConfig, StarRatingConfigService } from 'angular-star-rating';
+import { StarRatingService } from './Services/star-rating.service';
 
 @NgModule({
   declarations: [
@@ -72,7 +76,9 @@ import { RemainingTimePipe } from './Pipes/remaining-time.pipe';
     OrdersComponent,
     StateDirective,
     RemainingTimeComponent,
-    RemainingTimePipe
+    RemainingTimePipe,
+    TablesComponent,
+    RateComponent
   ],
   imports: [
     BrowserModule,
@@ -106,10 +112,12 @@ import { RemainingTimePipe } from './Pipes/remaining-time.pipe';
     MatExpansionModule,
     MatSortModule,
     MatPaginatorModule,
+    MatTabsModule,
     MatDialogModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    StarRatingModule.forRoot()
   ],
   providers: [HttpService, DataShareService, {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
               {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
@@ -117,9 +125,9 @@ import { RemainingTimePipe } from './Pipes/remaining-time.pipe';
               theme: 'light', size: 'normal', type: 'image', badge: 'inline'} as RecaptchaSettings},
               {provide: RECAPTCHA_LANGUAGE, useValue: 'es'},
               {provide: StorageBucket, useValue: 'gs://labo-iv.appspot.com'},
-              {provide: LocationStrategy, useClass: HashLocationStrategy}],
+              {provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: StarRatingConfigService, useClass: StarRatingService}],
   bootstrap: [AppComponent],
-  entryComponents: [SnackBarTemplateComponent, RemainingTimeComponent]
+  entryComponents: [SnackBarTemplateComponent, RemainingTimeComponent, RateComponent]
 })
 export class AppModule {
 }

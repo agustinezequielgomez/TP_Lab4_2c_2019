@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { faBeer, faClipboardList } from '@fortawesome/free-solid-svg-icons';
 import { DataProviderService } from '../../Services/data-provider.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,18 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['Access']);
   }
 
+  openDialog() {
+    this.provider.openDialog(true);
+    this.sideNav.close();
+  }
+
+  openRateDialog() {
+    this.provider.openDialog(false);
+    this.sideNav.close();
+  }
+
   redirect(screen: string) {
-    this.router.navigate([screen]);
+    this.sideNav.close();
+    timer(150).subscribe(() => this.router.navigate([screen]));
   }
 }

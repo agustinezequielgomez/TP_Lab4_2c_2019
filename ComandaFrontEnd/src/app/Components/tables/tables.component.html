@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <ngx-skeleton-loader *ngIf="!this.render" [appearance]="'lines'" [count]="10" [theme]="{'height': '10vh'}"></ngx-skeleton-loader>
+    <div *ngIf="this.render" class="vivify fade-in-fwd">
+        <h2 class="text-left">Mesas</h2>
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let table of this.tables" class="deployable">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Mesa {{table.id}} - {{table.codigo_identificacion}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{table.estado | titlecase}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <button class="actionButtons" mat-raised-button color="accent" [disabled]="enableChargeButton(table)" (click)="this.chargeTable(table.id)">Cobrar mesa</button>
+                <button class="actionButtons" mat-raised-button color="accent" [disabled]="enableCloseButton(table)"  (click)="this.closeTable(table.id)">Cerrar mesa</button>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>

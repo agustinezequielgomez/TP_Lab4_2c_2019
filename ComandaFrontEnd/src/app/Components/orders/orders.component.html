@@ -13,14 +13,14 @@
                         {{order.key.estado}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <mat-nav-list>
+                <mat-list>
                     <mat-list-item *ngFor="let food of order.value">
                         <p matLine>{{food.nombre_alimento | titlecase}}</p>
                         <p matLine>Estado: &nbsp;<span appState>{{food.estado}}</span></p>
                     </mat-list-item>
-                </mat-nav-list>
-                <button id="deliverButton" mat-raised-button color="accent" [disabled]="enableButton(order.key)" (click)="deliverOrder(order.key.id)">Entregar pedido</button>
-                <button id="cancelButton" mat-raised-button color="warn" [disabled]="enableCancelationButton(order.key)" (click)="cancelOrder(order.key.id)">Cancelar pedido</button>
+                </mat-list>
+                <button *ngIf="this.isWaitress === true" id="deliverButton" mat-raised-button color="accent" [disabled]="enableButton(order.key)" (click)="deliverOrder(order.key.id)">Entregar pedido</button>
+                <button *ngIf="this.isWaitress === true" id="cancelButton" mat-raised-button color="warn" [disabled]="enableCancelationButton(order.key)" (click)="cancelOrder(order.key.id)">Cancelar pedido</button>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

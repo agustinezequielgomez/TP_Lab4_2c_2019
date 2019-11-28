@@ -20,7 +20,8 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
   boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     this.share.setLastUrl(state.url);
-    if (state.url !== '/Access' && this.jwt.isTokenExpired(this.storage.getSessionStorage('data').token)) {
+    if (state.url !== '/Access' && this.storage.getSessionStorage('data') !== null
+        && this.jwt.isTokenExpired(this.storage.getSessionStorage('data').token)) {
       this.snack.openSnackBar('Autenticacion expirada. Volviendo al login.', 'warning', 2);
       timer(3000).subscribe(() => {
         this.router.navigate(['/Access']);
@@ -29,58 +30,27 @@ export class AuthGuardService implements CanActivate {
 
     const ROLE = this.storage.getSessionStorage('data').role;
     switch (state.url) {
+      case '/Home':
       case '/Access':
         return true;
 
-      case '/AdministratorScreen':
-        if (ROLE === 'administrador') {
-          return true;
-        } else {
-          this.redirect.redirectionService();
-        }
-        break;
+      case '/generateOrder':
+        return (ROLE === 'mozo') ?  true : this.router.navigate(['Home']);
 
-      case '/CerveceroScreen':
-          if (ROLE === 'cervecero') {
-            return true;
-          } else {
-            this.redirect.redirectionService();
-          }
-          break;
+      case '/Menu':
+        return (ROLE === 'administrador' || ROLE === 'cliente' || ROLE === 'socio') ? true : this.router.navigate(['Home']);
 
-      case '/CocineroScreen':
-          if (ROLE === 'cocinero') {
-            return true;
-          } else {
-            this.redirect.redirectionService();
-          }
-          break;
+      case '/Logs':
+        return (ROLE === 'administrador') ? true : this.router.navigate(['Home']);
 
-      case '/MozoScreen':
-          if (ROLE === 'mozo') {
-            return true;
-          } else {
-            this.redirect.redirectionService();
-          }
-          break;
+      case '/Orders':
+        return (ROLE === 'socio' || ROLE === 'mozo') ? true : this.router.navigate(['Home']);
 
-      case '/SocioScreen':
-          if (ROLE === 'socio') {
-            return true;
-          } else {
-            this.redirect.redirectionService();
-          }
-          break;
+      case '/Tables':
+        return (ROLE === 'socio') ? true : this.router.navigate(['Home']);
 
-      case '/ClienteScreen':
-        if (ROLE === 'cliente') {
-          return true;
-        } else {
-          this.redirect.redirectionService();
-        }
-        break;
+      case '/Prepare':
+        return (ROLE === 'cocinero' || ROLE === 'cervecero') ? true : this.router.navigate(['Home']);
     }
   }
-
-
 }

@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <p mat-dialog-title class="title">Consultar tiempo estimado</p>
+        <p mat-dialog-title class="title">{{this.title}}</p>
         <span class="spacer"></span>
         <button mat-icon-button color="accent" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
     </mat-toolbar-row>
@@ -18,7 +18,8 @@
     </mat-form-field>
 </div>
 <div *ngIf="this.gotThatTime === false && this.fetching === false" class="containers" mat-dialog-actions>
-    <button class="THEButton" mat-raised-button color="accent" [disabled]="this.disableButton()" (click)="getRemainingTime()">Consultar</button>
+    <button *ngIf="this.remainingTimeTemplate" class="THEButton" mat-raised-button color="accent" [disabled]="this.disableButton()" (click)="getRemainingTime()">Consultar</button>
+    <button *ngIf="!this.remainingTimeTemplate" class="THEButton" mat-raised-button color="accent" [disabled]="this.disableButton()" (click)="rateAvailable()">Consultar</button>
 </div>
 <div *ngIf="this.gotThatTime" class="containers" mat-dialog-content>
     <p class="text-center" [ngStyle]="{'font-size': '180%'}">Faltan:</p>

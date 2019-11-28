@@ -6,6 +6,7 @@ import { OrdersService } from '../../Services/orders.service';
 import { isNull } from 'util';
 import { FoodPreparationStates } from 'src/app/Classes/food-preparation-states';
 import { DisplaySnackBarService } from '../../Services/display-snack-bar.service';
+import { StorageService } from '../../Services/storage.service';
 
 @Component({
   selector: 'app-orders',
@@ -18,9 +19,12 @@ export class OrdersComponent implements OnInit {
   public ordersMap: Map<Pedido, Food[]>;
   public orders: Pedido[];
   public foods: Food[];
-  constructor(private foodService: FoodService, private ordersService: OrdersService, private snack: DisplaySnackBarService) { }
+  public isWaitress: boolean;
+  constructor(private foodService: FoodService, private ordersService: OrdersService, private snack: DisplaySnackBarService,
+              private storage: StorageService) { }
 
   ngOnInit() {
+    this.isWaitress = (this.storage.getSessionStorage('data').role === 'mozo');
     this.initialize();
   }
 
@@ -70,7 +74,7 @@ export class OrdersComponent implements OnInit {
   }
 
   enableCancelationButton(order: Pedido): boolean {
-    return (order.estado === FoodPreparationStates.Cancelado);
+    return (order.estado === FoodPreparationStates.Cancelado || order.estado === FoodPreparationStates.Entregado);
   }
 
   deliverOrder(orderId: number) {
@@ -79,7 +83,8 @@ export class OrdersComponent implements OnInit {
       this.initialize();
       this.snack.openSnackBar(response, 'success', 3);
     }, (err) => {
-      this.snack.openSnackBar(err.error, 'warning', 1);
+      this.render = true;
+      this.snack.openSnackBar(err.error, 'warning', 2);
     });
   }
 

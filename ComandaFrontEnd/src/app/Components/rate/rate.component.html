@@ -1,0 +1,33 @@
+<app-remaining-time *ngIf="!this.renderRates" [remainingTimeTemplate]="false" [title]="'Puntua tu experiecia'" (youCanRate)="this.init($event)"></app-remaining-time>
+<div *ngIf="this.renderRates">
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <p mat-dialog-title class="title">Puntua tu experiecia</p>
+        <span class="spacer"></span>
+        <button mat-icon-button color="accent" (click)="this.dialogRef.close()"><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-tab-group [color]="'accent'" [backgroundColor]="'primary'">
+    <mat-tab label="Mesa">
+        <star-rating [hoverEnabled]="true" [space]="'around'" [starType]="'svg'" [step]="2" (ratingChange)="getRating(1, $event)"></star-rating>
+    </mat-tab>
+    <mat-tab label="Mozo">
+        <star-rating [hoverEnabled]="true" [space]="'around'" [starType]="'svg'" [step]="2" (ratingChange)="getRating(2, $event)"></star-rating>
+    </mat-tab>
+    <mat-tab label="Cocinero">
+        <star-rating [hoverEnabled]="true" [space]="'around'" [starType]="'svg'" [step]="2" (ratingChange)="getRating(3, $event)"></star-rating>
+    </mat-tab>
+    <mat-tab label="Restaurant">
+        <star-rating [hoverEnabled]="true" [space]="'around'" [starType]="'svg'" [step]="2" (ratingChange)="getRating(4, $event)"></star-rating>
+    </mat-tab>
+    <mat-tab label="Comentario">
+        <mat-form-field id="formField">
+            <mat-label>Dejanos un comentario</mat-label>
+            <textarea matInput matTextareaAutosize [mat-autosize]="'false'" [matAutosizeMaxRows]="2" [(ngModel)]="this.comment"></textarea>
+        </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Enviar">
+        <button [ngStyle]="{'margin-right': '1%', 'margin-left': '2.5%', 'width': '95%'}" class="text-white" mat-raised-button color="accent" [disabled]="this.ratings.size < 4 || this.comment.length === 0" (click)="SendRatings()">Enviar</button>
+    </mat-tab>
+</mat-tab-group>
+</div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RemainingTimeComponent } from '../Components/remaining-time/remaining-time.component';
+import { RateComponent } from '../Components/rate/rate.component';
 
 
 @Injectable({
@@ -26,7 +27,9 @@ export class DataProviderService {
 
   private clientCard: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Pedido', subtitle: 'Consulta cuanto tiempo falta para que tu pedido este listo', imgPath: '../../assets/timer.jpg',
-    callback: () => this.openDialog()},
+    callback: () => this.openDialog(true)},
+    {title: 'Puntuanos', subtitle: 'Ayudanos a mejorar contandonos como fue tu experiencia', imgPath: '../../assets/rate.jpg',
+    callback: () => this.openDialog(false)},
     {title: 'Menu', subtitle: 'Consultar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Menu')},
   ];
 
@@ -36,14 +39,15 @@ export class DataProviderService {
   ];
 
   private mozoCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
-    {title: 'Pedidos', subtitle: 'Administrar pedidos', imgPath: '../../assets/pedidos.jpg', callback: () => this.redirect('generateOrder')}
+    {title: 'Pedidos', subtitle: 'Tomar pedidos', imgPath: '../../assets/pedidos.jpg', callback: () => this.redirect('generateOrder')},
+    {title: 'Pedidos', subtitle: 'Administrar pedidos', imgPath: '../../assets/pedidos.jpg', callback: () => this.redirect('Orders')}
   ];
 
   private socioCards: {title: string, subtitle: string, imgPath: string, callback: CallableFunction}[] = [
     {title: 'Pedidos', subtitle: 'Ver todos los pedidos en preparacion', imgPath: '../../assets/pedidos.jpg',
-    callback: () => this.redirect('Access')},
+    callback: () => this.redirect('Orders')},
     {title: 'Menu', subtitle: 'Administrar carta', imgPath: '../../assets/food.jpg', callback: () => this.redirect('Menu')},
-    {title: 'Mesas', subtitle: 'Cobrar y cerrar mesas', imgPath: '../../assets/table.jpg', callback: () => this.redirect('Access')}
+    {title: 'Mesas', subtitle: 'Cobrar y cerrar mesas', imgPath: '../../assets/table.jpg', callback: () => this.redirect('Tables')}
   ];
 
   public get getAdminCards() {
@@ -75,12 +79,12 @@ export class DataProviderService {
     this.router.navigate([`${screen}`]);
   }
 
-  openDialog() {
+  openDialog(remainingTime: boolean) {
     const CONFIG = new MatDialogConfig();
     CONFIG.hasBackdrop = true;
     CONFIG.height = '30%';
-    CONFIG.width = '70%';
+    (remainingTime) ? CONFIG.width = '70%' : CONFIG.width = '50%';
     CONFIG.panelClass = 'remainingTimeDialog';
-    this.dialog.open(RemainingTimeComponent, CONFIG);
+    (remainingTime) ? this.dialog.open(RemainingTimeComponent, CONFIG) : this.dialog.open(RateComponent, CONFIG);
   }
 }
